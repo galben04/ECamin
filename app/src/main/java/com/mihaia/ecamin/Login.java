@@ -50,6 +50,7 @@ public class Login extends AppCompatActivity {
             @Override
             protected void onPostExecute(UtilizatoriDB.UtilizatorModel utilizatorModel) {
                 super.onPostExecute(utilizatorModel);
+
                 Intent intent = new Intent(context, PaginaPrincipala.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
