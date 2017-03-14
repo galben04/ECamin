@@ -19,6 +19,7 @@ public class PaginaPrincipala extends AppCompatActivity {
         layoutMeniuSus = (LinearLayout) findViewById(R.id.layoutBaraMeniuSus);
         butArataMeniu = (Button) findViewById(R.id.buttonArataMeniuSus);
 
+        layoutMeniuSus.setVisibility(View.GONE);
         butArataMeniu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
