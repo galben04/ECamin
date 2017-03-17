@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,23 +9,24 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:grid="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/portocaliuING"
+        android:id="@+id/gridLayoutBaraSus">
         <!--android:layout_centerHorizontal="true"-->
         <!--grid:alignmentMode="alignBounds">-->
 
-        <ImageButton android:src="@drawable/logo"
+        <ImageView android:src="@drawable/logo"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:layout_width="90dp"
             android:layout_height="90dp"
             app:layout_rowSpan="2">
-        </ImageButton>
+        </ImageView>
 
         <EditText
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="Anghel Mihai"
-            />
+            android:text="Anghel Mihai" />
 
         <EditText
             android:layout_height="wrap_content"
@@ -38,9 +39,13 @@
             app:layout_column="3"
             app:layout_row="0"/>
 
-        <Button app:layout_column="3"
+        <Button
+            android:id="@+id/buttonArataMeniuSus"
+            android:paddingBottom="0dp"
+            android:text="aaa"
+            app:layout_column="3"
             app:layout_row="1"
-            android:id="@+id/buttonArataMeniuSus"/>
+            android:background="@drawable/test1"/>
 
         <LinearLayout android:orientation="horizontal"
             app:layout_column="0"
@@ -62,4 +67,46 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
     </android.support.v7.widget.GridLayout>
-</LinearLayout>
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--android:elevation="6dp"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gridLayoutBaraSus"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/albastruLogo"
+        app:tabTextColor="@color/alb"/>
+
+    <android.support.design.widget.BottomNavigationView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/navigationDown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/menu_buttom_navigation"
+        app:itemTextColor="@color/albastruLogo"
+        android:background="@color/portocaliuING"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tab_layout"
+        android:layout_above="@id/navigationDown" />
+
+
+</RelativeLayout>

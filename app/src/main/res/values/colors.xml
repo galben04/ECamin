@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--Primary Colors-->
+    <color name="alb">#FFFFff</color>
+    
+    <!--Culori Background bara Sus-->
+    <color name="verdeLogo">#74D14C</color>
+    <color name="albastruLogo">#083466</color>
+    <color name="portocaliuING">#ff6200</color>
 </resources>
