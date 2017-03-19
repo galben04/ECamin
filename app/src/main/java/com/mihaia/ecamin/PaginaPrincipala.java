@@ -1,9 +1,12 @@
 package com.mihaia.ecamin;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ButtonBarLayout;
@@ -19,6 +22,7 @@ public class PaginaPrincipala extends AppCompatActivity {
     LinearLayout layoutMeniuSus;
     Button butArataMeniu;
     TabLayout tabLayout;
+    ViewPager viewPager;
 
 
     @Override
@@ -35,6 +39,7 @@ public class PaginaPrincipala extends AppCompatActivity {
         butArataMeniu = (Button) findViewById(R.id.buttonArataMeniuSus);
 
         buttomNavView  = (BottomNavigationView) findViewById(R.id.navigationDown);
+        //buttomNavView.setItemTextColor(ColorStateList.valueOf(Color.BLACK));
         buttomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -63,6 +68,30 @@ public class PaginaPrincipala extends AppCompatActivity {
 
                 else if(layoutMeniuSus.getVisibility() == View.GONE)
                     layoutMeniuSus.setVisibility(View.VISIBLE);
+            }
+        });
+
+        viewPager = (ViewPager) findViewById(R.id.pager);
+
+        final PagerAdapter adapter = new PagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount());
+
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
     }
