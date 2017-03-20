@@ -5,4 +5,35 @@
         <item name="android:padding">0dp</item>
     </style>
 
+    <style name="LinieSepMare">
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:background">@color/verdeLogo</item>
+    </style>
+
+    <style name="LinieSepMic">
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/albastruLogo</item>
+    </style>
+
+    <style name="Container" parent="AlertDialog.AppCompat">
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="textTitlu" parent="Base.TextAppearance.AppCompat.Large">
+        <item name="textSize">20sp</item>
+    </style>
+
+    <style name="textNormal" parent="Base.TextAppearance.AppCompat.Medium">
+        <item name="textSize">18sp</item>
+    </style>
+
+    <style name="textSuma" parent="Base.TextAppearance.AppCompat.Medium">
+        <item name="textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

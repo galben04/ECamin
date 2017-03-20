@@ -14,10 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class PaginaPrincipala extends AppCompatActivity {
 
-    BottomNavigationView buttomNavView;
+    BottomNavigationView buttomBar;
 
     LinearLayout layoutMeniuSus;
     Button butArataMeniu;
@@ -30,30 +31,36 @@ public class PaginaPrincipala extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_principala);
 
+        ////TabLayout navigationUP
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
 
+
         layoutMeniuSus = (LinearLayout) findViewById(R.id.layoutBaraMeniuSus);
         butArataMeniu = (Button) findViewById(R.id.buttonArataMeniuSus);
 
-        buttomNavView  = (BottomNavigationView) findViewById(R.id.navigationDown);
+        buttomBar  = (BottomNavigationView) findViewById(R.id.navigationDown);
         //buttomNavView.setItemTextColor(ColorStateList.valueOf(Color.BLACK));
-        buttomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        buttomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId())
                 {
-                    case R.id.action_1:
-                        break;
-                    case R.id.action_2:
-                        break;
-                    case R.id.action_3:
-                        break;
-                    case R.id.action_4:
-                        break;
-                }
+                case R.id.action_1:
+                    Toast.makeText(getApplicationContext(), "OPT 1", Toast.LENGTH_LONG).show();
+                    break;
+                case R.id.action_2:
+                    Toast.makeText(getApplicationContext(), "OPT 2", Toast.LENGTH_LONG).show();
+                    break;
+                case R.id.action_3:
+                    Toast.makeText(getApplicationContext(), "OPT 3", Toast.LENGTH_LONG).show();
+                    break;
+                case R.id.action_4:
+                    Toast.makeText(getApplicationContext(), "OPT 1", Toast.LENGTH_LONG).show();
+                    break;
+        }
 
                 return true;
             }
@@ -95,4 +102,26 @@ public class PaginaPrincipala extends AppCompatActivity {
             }
         });
     }
+
+
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch(item.getItemId())
+//        {
+//            case R.id.action_1:
+//                Toast.makeText(getApplicationContext(), "OPT 1", Toast.LENGTH_LONG);
+//                break;
+//            case R.id.action_2:
+//                Toast.makeText(getApplicationContext(), "OPT 2", Toast.LENGTH_LONG);
+//                break;
+//            case R.id.action_3:
+//                Toast.makeText(getApplicationContext(), "OPT 3", Toast.LENGTH_LONG);
+//                break;
+//            case R.id.action_4:
+//                Toast.makeText(getApplicationContext(), "OPT 1", Toast.LENGTH_LONG);
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

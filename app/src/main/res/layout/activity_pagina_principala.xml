@@ -10,7 +10,7 @@
         xmlns:grid="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/albastruLogo"
+        android:background="@color/verdeLogo"
         android:id="@+id/gridLayoutBaraSus">
         <!--android:layout_centerHorizontal="true"-->
         <!--grid:alignmentMode="alignBounds">-->
@@ -86,7 +86,7 @@
         android:layout_below="@+id/gridLayoutBaraSus"
         android:elevation="6dp"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/albastruLogo"
+        android:background="@color/verdeLogo"
         app:tabTextColor="@color/alb"/>
 
     <android.support.design.widget.BottomNavigationView
@@ -95,10 +95,11 @@
         android:id="@+id/navigationDown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_alignParentBottom="true"
         app:menu="@menu/menu_buttom_navigation"
-         android:background="@color/albastruLogo"/>
+         android:background="@color/verdeLogo"
+        app:itemIconTint="@color/alb"
+        app:itemTextColor="#000000"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

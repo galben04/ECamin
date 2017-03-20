@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/background_gri">
+
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/alb"
+    android:layout_margin="10dp"
+    style="@style/Container"
+    android:padding="15dp"
+    android:stretchColumns="1">
+
+    <TableRow>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/luna_martie"
+        style="@style/textNormal"
+        android:textColor="@color/albastruLogo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="133 RON"
+            style="@style/textSuma"
+            android:gravity="right"
+            android:textColor="#000000"/>
+
+        <ImageButton
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_row="0"
+            app:layout_column="2"
+            android:background="@drawable/more_24"
+            android:gravity="right"
+            android:padding="12dp"/>
+    </TableRow>
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        style="@style/LinieSepMic"
+        android:background="@color/verdeLogo"
+        app:layout_row="1"
+        app:layout_column="0"
+        app:layout_columnSpan="3" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_row="2"
+        app:layout_column="0"
+        app:layout_columnSpan="3"
+        android:stretchColumns="1"
+        android:layout_margin="5dp">
+
+        <TableRow
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/data_plata"
+                style="@style/textNormal"
+                android:textColor="#000000"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/data_scadenta"
+                android:gravity="center"
+                style="@style/textNormal"
+                android:textColor="#000000"/>
+        </TableRow>
+
+        <TableRow>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/data_plata" />-->
+
+            <LinearLayout android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@color/albastruLogo"
+                android:layout_gravity="center"
+                android:padding="7dp"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="13"
+                    android:textColor="@color/alb"
+                    style="@style/textSuma"
+                    android:gravity="center"
+                    />
+
+           <TextView
+               android:layout_gravity="center"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Martie"
+               android:textColor="@color/alb"
+               style="@style/textSuma"/>
+            </LinearLayout>
+
+            <LinearLayout android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@color/albastruLogo"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="7dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="13"
+                    android:textColor="@color/alb"
+                    style="@style/textSuma"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Martie"
+                    android:textColor="@color/alb"
+                    style="@style/textSuma"/>
+            </LinearLayout>
+        </TableRow>
+
+    </TableLayout>
+
+
+</TableLayout>
+</LinearLayout>

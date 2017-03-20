@@ -20,5 +20,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="plata_scadenta_titlu">Plata Scadenta</string>
+    <string name="intretinere_camin">Plata Camin:</string>
+    <string name="luna_martie">Martie</string>
+    <string name="data_plata">Data plata:</string>
+    <string name="data_scadenta">Data scandeta:</string>
 
 </resources>
