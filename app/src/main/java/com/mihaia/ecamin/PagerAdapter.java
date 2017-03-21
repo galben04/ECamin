@@ -31,7 +31,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 fragment =  tab2;
                 break;
             case 2:
-                PlataScadentaFragment tab3 = new PlataScadentaFragment();
+                IstoricFragment tab3 = new IstoricFragment();
                 fragment =  tab3;
                 break;
             default:

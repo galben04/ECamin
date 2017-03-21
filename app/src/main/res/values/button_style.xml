@@ -24,15 +24,15 @@
     </style>
 
     <style name="textTitlu" parent="Base.TextAppearance.AppCompat.Large">
-        <item name="textSize">20sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="textNormal" parent="Base.TextAppearance.AppCompat.Medium">
-        <item name="textSize">18sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="textSuma" parent="Base.TextAppearance.AppCompat.Medium">
-        <item name="textSize">18sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

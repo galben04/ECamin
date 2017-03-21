@@ -22,7 +22,8 @@
         android:layout_height="wrap_content"
         android:text="@string/luna_martie"
         style="@style/textNormal"
-        android:textColor="@color/albastruLogo"/>
+        android:textColor="@color/albastruLogo"
+        android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -58,7 +59,8 @@
         app:layout_column="0"
         app:layout_columnSpan="3"
         android:stretchColumns="1"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:paddingBottom="10dp">
 
         <TableRow
             android:layout_margin="10dp">
