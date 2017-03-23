@@ -23,7 +23,8 @@
         android:text="@string/luna_martie"
         style="@style/textNormal"
         android:textColor="@color/albastruLogo"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:id="@+id/textViewIstoricLuna"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,7 +32,8 @@
             android:text="133 RON"
             style="@style/textSuma"
             android:gravity="right"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:id="@+id/textViewIstoricSuma"/>
 
         <ImageButton
             android:layout_marginLeft="10dp"
@@ -41,7 +43,8 @@
             app:layout_column="2"
             android:background="@drawable/more_24"
             android:gravity="right"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:id="@+id/imgBtnIstoricDetalii"/>
     </TableRow>
     <View
         android:layout_marginTop="10dp"
@@ -60,7 +63,8 @@
         app:layout_columnSpan="3"
         android:stretchColumns="1"
         android:layout_margin="5dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:id="@+id/tableLayoutDetalii">
 
         <TableRow
             android:layout_margin="10dp">
@@ -102,7 +106,7 @@
                     android:textColor="@color/alb"
                     style="@style/textSuma"
                     android:gravity="center"
-                    />
+                    android:id="@+id/textViewIstoricZiPlata" />
 
            <TextView
                android:layout_gravity="center"
@@ -110,7 +114,8 @@
                android:layout_height="wrap_content"
                android:text="Martie"
                android:textColor="@color/alb"
-               style="@style/textSuma"/>
+               style="@style/textSuma"
+               android:id="@+id/textViewIstoricLunaPlata"/>
             </LinearLayout>
 
             <LinearLayout android:orientation="vertical"
@@ -127,7 +132,8 @@
                     android:text="13"
                     android:textColor="@color/alb"
                     style="@style/textSuma"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:id="@+id/textViewIstoricZiScadenta"/>
 
                 <TextView
                     android:layout_gravity="center"
@@ -135,7 +141,8 @@
                     android:layout_height="wrap_content"
                     android:text="Martie"
                     android:textColor="@color/alb"
-                    style="@style/textSuma"/>
+                    style="@style/textSuma"
+                    android:id="@+id/textViewIstoricLunaScadenta"/>
             </LinearLayout>
         </TableRow>
 
