@@ -1,15 +1,20 @@
 package com.mihaia.ecamin;
 
 import android.content.Context;
+import android.icu.util.Calendar;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import java.util.zip.Inflater;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +33,10 @@ public class IstoricFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerViewAdapter mRecycleViewAdaper;
+    private RecyclerView recyclerView;
+    ArrayList<InformatiiPlata> arrayList;
 
     private OnFragmentInteractionListener mListener;
 
@@ -62,10 +71,49 @@ public class IstoricFragment extends Fragment {
         }
     }
 
+
+    private void initListTemp() {
+        GregorianCalendar dataScadenta = new GregorianCalendar();
+
+        dataScadenta.add(GregorianCalendar.DAY_OF_MONTH, 10);
+        dataScadenta.add(GregorianCalendar.MONTH, 1);
+
+        GregorianCalendar dataPlata = new GregorianCalendar();
+        dataPlata.add(GregorianCalendar.DAY_OF_MONTH, 5);
+        dataPlata.add(GregorianCalendar.MONTH, 1);
+
+        arrayList = new ArrayList<InformatiiPlata>();
+
+        arrayList.add(new InformatiiPlata("Ianuarie", (float)88.3, dataPlata, dataScadenta));
+
+        dataScadenta.add(GregorianCalendar.MONTH, 2);
+        dataPlata.add(GregorianCalendar.MONTH, 2);
+        arrayList.add(new InformatiiPlata("Februarie", (float)88.3, dataPlata, dataScadenta));
+
+        dataScadenta.add(GregorianCalendar.MONTH, 3);
+        dataPlata.add(GregorianCalendar.MONTH, 3);
+        arrayList.add(new InformatiiPlata("Martie", (float)88.3, dataPlata, dataScadenta));
+
+        dataScadenta.add(GregorianCalendar.MONTH, 4);
+        dataPlata.add(GregorianCalendar.MONTH, 4);
+        arrayList.add(new InformatiiPlata("Aprilie", (float)88.3, dataPlata, dataScadenta));
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.element_lista_istoric, container, false);
+        View view = inflater.inflate(R.layout.fragment_istoric_plati, container, false);
+
+        initListTemp();
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewIstoric);
+        mRecycleViewAdaper = new RecyclerViewAdapter(arrayList);
+
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(mRecycleViewAdaper);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

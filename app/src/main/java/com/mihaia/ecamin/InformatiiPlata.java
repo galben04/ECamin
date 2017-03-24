@@ -1,6 +1,6 @@
 package com.mihaia.ecamin;
 
-import android.icu.util.Calendar;
+import java.util.GregorianCalendar;
 import android.support.design.widget.TabLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -16,9 +16,9 @@ public class InformatiiPlata {
 
    private String luna;
    private Float suma;
-   private Calendar dataPlata, dataScandeta;
+   private GregorianCalendar dataPlata, dataScandeta;
 
-    public InformatiiPlata(String luna, Float suma, Calendar dataPlata, Calendar dataScandeta) {
+    public InformatiiPlata(String luna, Float suma, GregorianCalendar dataPlata, GregorianCalendar dataScandeta) {
         this.luna = luna;
         this.suma = suma;
         this.dataPlata = dataPlata;
@@ -45,19 +45,19 @@ public class InformatiiPlata {
         this.suma = suma;
     }
 
-    public Calendar getDataPlata() {
+    public GregorianCalendar getDataPlata() {
         return dataPlata;
     }
 
-    public void setDataPlata(Calendar dataPlata) {
+    public void setDataPlata(GregorianCalendar dataPlata) {
         this.dataPlata = dataPlata;
     }
 
-    public Calendar getDataScandeta() {
+    public GregorianCalendar getDataScandeta() {
         return dataScandeta;
     }
 
-    public void setDataScandeta(Calendar dataScandeta) {
+    public void setDataScandeta(GregorianCalendar dataScandeta) {
         this.dataScandeta = dataScandeta;
     }
 }
