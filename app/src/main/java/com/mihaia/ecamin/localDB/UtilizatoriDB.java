@@ -54,11 +54,12 @@ public class UtilizatoriDB {
                 allColumns, DBHelper.COLUMN_ID + " = " + insertId, null,
                 null, null, null);
         cursor.moveToFirst();
-        UtilizatorModel newTara = cursorToUtilizator(cursor);
+        UtilizatorModel newUtilizator = cursorToUtilizator(cursor);
         cursor.close();
 
-        return  newTara;
+        return  newUtilizator;
     }
+
 
     public void deleteUtilizator(UtilizatorModel tara) {
         long id = tara.getId();
@@ -71,6 +72,7 @@ public class UtilizatoriDB {
     public void  deleteAllUtilizatori(){
         database.delete(DBHelper.TABLE_UTILIZATORI, null , null);
     }
+
 
     public UtilizatorModel getUtilizator(String nume, String parola){
         UtilizatorModel utilizator = null;

@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TabHost;
 import android.widget.Toast;
 
 public class PaginaPrincipala extends AppCompatActivity {
@@ -49,10 +50,14 @@ public class PaginaPrincipala extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                 case R.id.action_1:
-                    Toast.makeText(getApplicationContext(), "OPT 1", Toast.LENGTH_LONG).show();
+                    tabLayout.getTabAt(0).setText(R.string.opt1_tab1);
+                    tabLayout.getTabAt(1).setText(R.string.opt1_tab2);
+                    tabLayout.getTabAt(2).setText(R.string.opt1_tab3);
                     break;
                 case R.id.action_2:
-                    Toast.makeText(getApplicationContext(), "OPT 2", Toast.LENGTH_LONG).show();
+                    tabLayout.getTabAt(0).setText(R.string.opt1_tab1);
+                    tabLayout.getTabAt(1).setText(R.string.opt1_tab2);
+                    tabLayout.getTabAt(2).setText(R.string.opt1_tab3);
                     break;
                 case R.id.action_3:
                     Toast.makeText(getApplicationContext(), "OPT 3", Toast.LENGTH_LONG).show();

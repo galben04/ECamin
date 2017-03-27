@@ -51,9 +51,13 @@ public class Login extends AppCompatActivity {
             protected void onPostExecute(UtilizatoriDB.UtilizatorModel utilizatorModel) {
                 super.onPostExecute(utilizatorModel);
 
-                Intent intent = new Intent(context, PaginaPrincipala.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                if(utilizatorModel != null) {
+                    Intent intent = new Intent(context, PaginaPrincipala.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }else{
+                    Toast.makeText(context, R.string.error_login_failed, Toast.LENGTH_SHORT);
+                }
             }
         };
         verificaDate.execute(eTextUser.getText().toString(), eTextPass.getText().toString());

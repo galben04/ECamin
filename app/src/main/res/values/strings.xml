@@ -13,6 +13,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="error_login_failed">Contul si parola nu se potrivesc sau nu exista in baza de date!</string>
     <string name="action_register">Cont Nou</string>
     <string name="title_activity_tabbed_actvity">TabbedActvity</string>
     <string name="action_settings">Settings</string>
@@ -26,4 +27,19 @@
     <string name="data_plata">Data plata:</string>
     <string name="data_scadenta">Data scandeta:</string>
 
+    <string name="opt1_tab1">Plata</string>
+    <string name="opt1_tab2">Istoric</string>
+    <string name="opt1_tab3">Internet</string>
+
+    <string name="opt2_tab1">1</string>
+    <string name="opt2_tab2">2</string>
+    <string name="opt2_tab3">3</string>
+
+    <string name="opt3_tab1">4</string>
+    <string name="opt3_tab2">5</string>
+    <string name="opt3_tab3">6</string>
+
+    <string name="opt4_tab1">7</string>
+    <string name="opt4_tab2">8</string>
+    <string name="opt4_tab3">9</string>
 </resources>

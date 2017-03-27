@@ -56,8 +56,6 @@
                 android:text="@string/action_sign_in_short"/>
         </LinearLayout>
 
-
-
     </LinearLayout>
 
 </LinearLayout>
