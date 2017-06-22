@@ -42,4 +42,11 @@
     <string name="opt4_tab1">7</string>
     <string name="opt4_tab2">8</string>
     <string name="opt4_tab3">9</string>
+    <string name="buton_jos_plati">Plati</string>
+    <string name="buton_jos_plangeri">Plangeri</string>
+    <string name="buton_jos_programari">Programari</string>
+    <string name="buton_jos_setari">Setari</string>
+    <string name="button_trimite">Trimite</string>
+    <string name="plangere_noua_titlu">Plangere Noua</string>
+    <string name="programare_noua_titlu">Programare Noua</string>
 </resources>

@@ -10,7 +10,7 @@
         xmlns:grid="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/verdeLogo"
+        android:background="@color/verdeAndrei"
         android:id="@+id/gridLayoutBaraSus">
         <!--android:layout_centerHorizontal="true"-->
         <!--grid:alignmentMode="alignBounds">-->
@@ -26,14 +26,16 @@
         <EditText
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="Anghel Mihai" />
+            android:text="Anghel Mihai"
+            android:inputType="none"/>
 
         <EditText
             android:layout_height="wrap_content"
             android:text="Camera 414"
             android:layout_width="wrap_content"
             app:layout_column="1"
-            app:layout_row="1"/>
+            app:layout_row="1"
+            android:inputType="none"/>
 
         <Button
             app:layout_column="3"
@@ -86,7 +88,7 @@
         android:layout_below="@+id/gridLayoutBaraSus"
         android:elevation="6dp"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/verdeLogo"
+        android:background="@color/verdeAndrei"
         app:tabTextColor="@color/alb"/>
 
 <ScrollView
@@ -111,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/menu_buttom_navigation"
-         android:background="@color/verdeLogo"
+         android:background="@color/verdeAndrei"
         app:itemIconTint="@color/alb"
         app:itemTextColor="#000000"/>
 

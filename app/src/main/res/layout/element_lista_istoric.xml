@@ -121,7 +121,7 @@
             <LinearLayout android:orientation="vertical"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:background="@color/albastruLogo"
+                android:background="@color/galbenAndrei"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="7dp">

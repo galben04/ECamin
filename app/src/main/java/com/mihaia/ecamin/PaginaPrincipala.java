@@ -34,9 +34,9 @@ public class PaginaPrincipala extends AppCompatActivity {
 
         ////TabLayout navigationUP
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.opt1_tab1));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.opt1_tab2));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.opt1_tab3));
 
 
         layoutMeniuSus = (LinearLayout) findViewById(R.id.layoutBaraMeniuSus);
@@ -55,12 +55,15 @@ public class PaginaPrincipala extends AppCompatActivity {
                     tabLayout.getTabAt(2).setText(R.string.opt1_tab3);
                     break;
                 case R.id.action_2:
-                    tabLayout.getTabAt(0).setText(R.string.opt1_tab1);
-                    tabLayout.getTabAt(1).setText(R.string.opt1_tab2);
-                    tabLayout.getTabAt(2).setText(R.string.opt1_tab3);
+                    tabLayout.getTabAt(0).setText(R.string.opt2_tab1);
+                    tabLayout.getTabAt(1).setText(R.string.opt2_tab2);
+                    tabLayout.getTabAt(2).setText(R.string.opt2_tab3);
                     break;
                 case R.id.action_3:
                     Toast.makeText(getApplicationContext(), "OPT 3", Toast.LENGTH_LONG).show();
+                    tabLayout.getTabAt(0).setText("Principala");
+                    tabLayout.getTabAt(1).setText("Programarile mele");
+                    tabLayout.getTabAt(2).setText(R.string.opt1_tab3);
                     break;
                 case R.id.action_4:
                     Toast.makeText(getApplicationContext(), "OPT 1", Toast.LENGTH_LONG).show();
@@ -93,7 +96,7 @@ public class PaginaPrincipala extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
+               // viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override

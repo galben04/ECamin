@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.mihaia.ecamin.DataContracts.Programare;
+
 /**
  * Created by Mihai on 3/19/2017.
  */
@@ -28,12 +30,14 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
                 break;
             case 1:
-                IstoricFragment tab2 = new IstoricFragment();
+                ProgramareNouaFragemnt tab2 = new ProgramareNouaFragemnt();
                 fragment =  tab2;
                 break;
             case 2:
                 IstoricFragment tab3 = new IstoricFragment();
                 fragment =  tab3;
+                //ProgramarileMeleFragment tab4 = new ProgramarileMeleFragment();
+                //fragment = tab4;
                 break;
             default:
                 break;

@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mihaia.ecamin.PlangereNoua"
+    android:background="@color/background_gri">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        style="@style/Container"
+        android:background="@color/alb"
+    android:layout_margin= "@dimen/activity_horizontal_margin">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/plangere_noua_titlu"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@color/albastruLogo"
+            android:layout_marginBottom="5dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            style="@style/LinieSepMare"
+            ></View>
+
+        <Spinner android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:entries="@array/spinnerItems"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            style="@style/Spinner"
+            android:spinnerMode="dropdown">
+        </Spinner>
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:hint="Nume"/>
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="Camera"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Detalii"
+            android:maxLines="4"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F2EC2C"
+            android:textColor="@color/alb"
+            android:text="@string/button_trimite"
+            style="@style/textNormal"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+</LinearLayout>

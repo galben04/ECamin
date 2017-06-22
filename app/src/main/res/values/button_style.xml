@@ -6,7 +6,7 @@
     </style>
 
     <style name="LinieSepMare">
-        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
         <item name="android:layout_marginTop">2dp</item>
         <item name="android:layout_height">3dp</item>
         <item name="android:background">@color/verdeLogo</item>
@@ -36,4 +36,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Spinner" parent="Widget.AppCompat.Spinner">
+        <item name="backgroundTint">@color/verdeLogo</item>
+    </style>
 </resources>

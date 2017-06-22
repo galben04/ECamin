@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/action_1"
-          android:title="Opt1"
+          android:title="@string/buton_jos_plati"
         android:icon="@drawable/plati2_albastru"/>
 
     <item android:id="@+id/action_2"
-          android:title="Opt2"
+          android:title="@string/buton_jos_plangeri"
         android:icon="@drawable/plangeri_albastru"/>
 
     <item android:id="@+id/action_3"
-        android:title="Opt3"
+        android:title="@string/buton_jos_programari"
         android:icon="@drawable/programari_albastru"/>
 
 
     <item android:id="@+id/action_4"
-        android:title="Opt4"
+        android:title="@string/buton_jos_setari"
         android:icon="@drawable/setari_albastru"/>
 </menu>
