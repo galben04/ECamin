@@ -49,4 +49,9 @@
     <string name="button_trimite">Trimite</string>
     <string name="plangere_noua_titlu">Plangere Noua</string>
     <string name="programare_noua_titlu">Programare Noua</string>
+    <string name="id_masina">Id Masina</string>
+    <string name="etaj">Etaj</string>
+    <string name="id_masina_1">Masina 1</string>
+    <string name="etaj_1">Etaj 1</string>
+    <string name="detalii_programare">Detalii Programare:</string>
 </resources>
