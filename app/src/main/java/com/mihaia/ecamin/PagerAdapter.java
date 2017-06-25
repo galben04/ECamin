@@ -34,10 +34,10 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 fragment =  tab2;
                 break;
             case 2:
-                IstoricFragment tab3 = new IstoricFragment();
-                fragment =  tab3;
-                //ProgramarileMeleFragment tab4 = new ProgramarileMeleFragment();
-                //fragment = tab4;
+//                IstoricFragment tab3 = new IstoricFragment();
+//                fragment =  tab3;
+                ProgramarileMeleFragment tab4 = new ProgramarileMeleFragment();
+                fragment = tab4;
                 break;
             default:
                 break;

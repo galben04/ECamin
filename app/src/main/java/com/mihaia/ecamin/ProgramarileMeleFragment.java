@@ -140,29 +140,33 @@ public class ProgramarileMeleFragment extends Fragment {
             return null;
         }
 
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
             Gson gson =  new Gson();
             Programare programare = new Programare();
-            programare.Data_Ora = new Timestamp(new GregorianCalendar().getTimeInMillis());
-            programare.Id_Masina = 1;
-            programare.Id_User = 1;
-            programare.IsDel = false;
-            programare.Id_Programare = 1;
+//            programare.Data_Ora = new Date();
+//            programare.Id_Masina = 1;
+//            programare.Id_User = 1;
+//            programare.IsDel = false;
+//            programare.Id_Programare = 1;
 
             //Programari programari = null;
             String JSON  = gson.toJson(programare);
-            Type collectionType = new TypeToken<ArrayList<Programare>>(){}.getType();
-            Collection<Programare> programari = null;
+
+//            Type collectionType = new TypeToken<ArrayList<Programare>>(){}.getType();
+//            Collection<Programare> programari = null;
+            Programare p1 = null;
             try {
-                programari = gson.fromJson(server_response,collectionType);
+                p1 = gson.fromJson(server_response,Programare.class);
             }catch(IllegalStateException | JsonSyntaxException exception){
                 exception.printStackTrace();
             }
 
-                data.addAll((Collection<? extends Programare>) programari);
+            data.add(p1);
+              //  data.addAll((Collection<? extends Programare>) programari);
             Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_LONG);
             Log.e("Response", "" + server_response);
 
@@ -172,7 +176,7 @@ public class ProgramarileMeleFragment extends Fragment {
 
 
     private void getData() throws IOException {
-        new SelectMethodAsync().execute("http://192.168.0.129:51133/Programari/All");
+        new SelectMethodAsync().execute("http://192.168.192.1:51133/Programari(1)");
     }
 
 

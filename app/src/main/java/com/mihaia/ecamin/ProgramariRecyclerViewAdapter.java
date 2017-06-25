@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.mihaia.ecamin.DataContracts.Programare;
 
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -30,13 +31,13 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
         public ViewHolder(View view) {
             super(view);
 
-            IdProgramare = (TextView) view.findViewById(R.id.tvID_Programare);
-            data = (TextView) view.findViewById(R.id.tvData_Programare);
+            IdProgramare = (TextView) view.findViewById(R.id.tvProgramari_IdProgramare);
+            data = (TextView) view.findViewById(R.id.tvProgramari_Data);
             //btnDetalii = (ImageButton) view.findViewById(R.id.imgBtnIstoricDetalii);
 
-            IdUser = (TextView) view.findViewById(R.id.tvIDUser_Programare);
-            IdMasina = (TextView) view.findViewById(R.id.tvIdMasina_Programare);
-            IsDel = (TextView) view.findViewById(R.id.checkBoxIsDel_Programare);
+            IdUser = (TextView) view.findViewById(R.id.tvProgramari_Etaj_TempUser);
+            IdMasina = (TextView) view.findViewById(R.id.tvProgramari_IdMasina);
+            IsDel = (TextView) view.findViewById(R.id.isDel);
 //            ziScadenta = (TextView) view.findViewById(R.id.textViewIstoricZiScadenta);
 //            lunaScadenta = (TextView) view.findViewById(R.id.textViewIstoricLunaScadenta);
 //
@@ -76,12 +77,13 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ProgramariRecyclerViewAdapter.ViewHolder holder, int poz) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
+
         holder.IdProgramare.setText(String.valueOf(mDataset.get(poz).Id_Programare));
         holder.IdMasina.setText(String.valueOf(mDataset.get(poz).Id_Masina));
         holder.IdUser.setText(String.valueOf(mDataset.get(poz).Id_User));
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm");
+        holder.data.setText(dateFormat.format(mDataset.get(poz).Data_Ora));
         //holder.data.setText("" + ( mDataset.get(poz).Data_Ora.get(GregorianCalendar.DATE)));
         //holder.lunaPlata.setText("" + mDataset.get(poz).getDataPlata().get(GregorianCalendar.MONTH));
 

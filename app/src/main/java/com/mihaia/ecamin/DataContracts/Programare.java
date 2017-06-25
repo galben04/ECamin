@@ -15,7 +15,7 @@ public class Programare {
 
     public int Id_Programare;
 
-    public Timestamp Data_Ora;
+    public Date Data_Ora;
 
     public int Id_Masina;
 
