@@ -22,4 +22,14 @@ public class Programare {
     public int Id_User;
 
     public boolean IsDel;
+
+    public Programare(int id_Programare, Date data_Ora, int id_Masina, int id_User, boolean isDel) {
+        Id_Programare = id_Programare;
+        Data_Ora = data_Ora;
+        Id_Masina = id_Masina;
+        Id_User = id_User;
+        IsDel = isDel;
+    }
+
+    public Programare(){}
 }

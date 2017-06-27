@@ -39,7 +39,8 @@
 
         <Button
             app:layout_column="3"
-            app:layout_row="0"/>
+            app:layout_row="0"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/buttonArataMeniuSus"
@@ -47,7 +48,8 @@
             android:text="aaa"
             app:layout_column="3"
             app:layout_row="1"
-            android:background="@drawable/test1"/>
+            android:background="@drawable/test1"
+            android:visibility="gone"/>
 
         <LinearLayout android:orientation="horizontal"
             app:layout_column="0"

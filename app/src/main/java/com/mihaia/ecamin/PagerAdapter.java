@@ -13,31 +13,35 @@ import com.mihaia.ecamin.DataContracts.Programare;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
-
+    Utils.Sectiuni sectiuneCurenta;
+    Fragment tab1, tab2, tab3;
 
     public PagerAdapter(FragmentManager fm, int mNumOfTabs) {
         super(fm);
         this.mNumOfTabs = mNumOfTabs;
+        setSectiuneCurenta(Utils.Sectiuni.Plati);
+    }
+
+    @Override
+    public int getItemPosition(Object object){
+        return PagerAdapter.POSITION_NONE;
     }
 
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
+
         switch (position) {
             case 0:
-                PlataScadentaFragment tab1 = new PlataScadentaFragment();
                 fragment =  tab1;
-
                 break;
+
             case 1:
-                ProgramareNouaFragemnt tab2 = new ProgramareNouaFragemnt();
                 fragment =  tab2;
                 break;
+
             case 2:
-//                IstoricFragment tab3 = new IstoricFragment();
-//                fragment =  tab3;
-                ProgramarileMeleFragment tab4 = new ProgramarileMeleFragment();
-                fragment = tab4;
+                fragment = tab3;
                 break;
             default:
                 break;
@@ -54,6 +58,45 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return "OBJECT " + (position + 1);
+    }
+
+
+    public Utils.Sectiuni getSectiuneCurenta() {
+        return sectiuneCurenta;
+    }
+
+    public void setSectiuneCurenta(Utils.Sectiuni sectiuneCurenta) {
+        this.sectiuneCurenta = sectiuneCurenta;
+
+        switch (sectiuneCurenta)
+        {
+            default:
+            case Plati:
+                tab1 = new PlataScadentaFragment();
+                tab2 = new IstoricPlatiFragment();
+                tab3 = new PlataScadentaFragment();
+                break;
+
+            case Plangeri:
+                tab1 = new PlataScadentaFragment();
+                tab2 = new IstoricPlatiFragment();
+                tab3 = null;
+                break;
+
+            case Programari:
+                tab1 = new ProgramarileMeleFragment();
+                tab2 = new ProgramareNouaFragemnt();
+                tab3 = null;
+                break;
+
+            case Setari:
+                tab1 = new PlataScadentaFragment();
+                tab2 = new IstoricPlatiFragment();
+                tab3 = new PlataScadentaFragment();
+                break;
+        }
+
+        notifyDataSetChanged();
     }
 }
 

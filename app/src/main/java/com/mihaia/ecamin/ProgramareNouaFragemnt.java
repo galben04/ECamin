@@ -18,7 +18,6 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mihaia.ecamin.DataContracts.Programare;
 
-import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +30,6 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 
@@ -96,11 +94,11 @@ public class ProgramareNouaFragemnt extends Fragment {
                 Programare newItem = new Programare();
                 newItem.Id_User  = (Integer.valueOf(textViewIdUser.getText().toString()));
                 newItem.Id_Masina = Integer.valueOf(textViewIdMasina.getText().toString());
-                newItem.Data_Ora = new Date();
+                newItem.Data_Ora = new Timestamp(new GregorianCalendar().getTimeInMillis());
                 newItem.IsDel = false;
 
                 new InsertMethodAsync().execute(newItem);
-                }
+            }
         });
 
         return view;
@@ -120,19 +118,20 @@ public class ProgramareNouaFragemnt extends Fragment {
 
             String jsonString = gson.toJson(programari[0]);
 
-           // JSONObject jsonObject = new JSONObject();
-//            try {
-//                jsonObject.put("Data_Ora", "\\/Date(1497884881680+0300)\\/");
-//                jsonObject.put("Id_Masina", 1);
-//                jsonObject.put("Id_User", 1);
-//                jsonObject.put("IsDel", false);
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("Data_Ora", "\\/Date(1497884881680+0300)\\/");
+                jsonObject.put("Id_Masina", 1);
+                jsonObject.put("Id_User", 1);
+                jsonObject.put("IsDel", false);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
 
             try {
-                url = new URL("http://192.168.192.1:51133/Programari/Insert");
+                url = new URL("http://192.168.0.129:51133/Programari/Insert");
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 urlConnection.setReadTimeout(10 * 1000);
@@ -145,7 +144,7 @@ public class ProgramareNouaFragemnt extends Fragment {
 
                 // Post Json
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
-                outputStreamWriter.write(jsonString);
+                outputStreamWriter.write(jsonObject.toString());
                 outputStreamWriter.close();
 
                 // Receive Response from server
@@ -153,7 +152,7 @@ public class ProgramareNouaFragemnt extends Fragment {
                 Log.d("debug", "The response is: " + statusCode);
 
                 if(statusCode == HttpURLConnection.HTTP_OK){
-                    server_response = GoiWCF.readStream(urlConnection.getInputStream());
+                    server_response = ProgramarileMeleFragment.readStream(urlConnection.getInputStream());
                     Log.v("CatalogClient", server_response);
                 }
 

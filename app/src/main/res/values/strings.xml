@@ -35,13 +35,14 @@
     <string name="opt2_tab2">2</string>
     <string name="opt2_tab3">3</string>
 
-    <string name="opt3_tab1">4</string>
-    <string name="opt3_tab2">5</string>
-    <string name="opt3_tab3">6</string>
+    <string name="opt3_tab1">Programarile mele</string>
+    <string name="opt3_tab2">Programare noua</string>
+    <string name="opt3_tab3">Vedem</string>
 
     <string name="opt4_tab1">7</string>
     <string name="opt4_tab2">8</string>
     <string name="opt4_tab3">9</string>
+
     <string name="buton_jos_plati">Plati</string>
     <string name="buton_jos_plangeri">Plangeri</string>
     <string name="buton_jos_programari">Programari</string>
@@ -54,4 +55,8 @@
     <string name="id_masina_1">Masina 1</string>
     <string name="etaj_1">Etaj 1</string>
     <string name="detalii_programare">Detalii Programare:</string>
+    <string name="dialog_ProgramareSterge_Titlu">Anuleaza programarea</string>
+    <string name="dialog_ProgramareSterge_Mesaj">Doriti sa stergeti programarea?</string>
+    <string name="da">Da</string>
+    <string name="nu">Nu</string>
 </resources>

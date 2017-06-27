@@ -1,10 +1,12 @@
 package com.mihaia.ecamin;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -40,39 +42,56 @@ import java.util.List;
 
 
 public class ProgramarileMeleFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+//    // TODO: Rename parameter arguments, choose names that match
+//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+//    private static final String ARG_PARAM1 = "param1";
+//    private static final String ARG_PARAM2 = "param2";
+//
+//    // TODO: Rename and change types of parameters
+//    private String mParam1;
+//    private String mParam2;
 
     private ProgramariRecyclerViewAdapter mRecycleViewAdaper;
     private RecyclerView recyclerView;
     private OnFragmentInteractionListener mListener;
     private List<Programare> data = new ArrayList<Programare>();
+    private Context context;
 
     public ProgramarileMeleFragment() {
-        // Required empty public constructor
+
     }
 
     public static ProgramarileMeleFragment newInstance(String param1, String param2) {
         ProgramarileMeleFragment fragment = new ProgramarileMeleFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
+    }
+
+        ////Pentru a vedea daca fragmentul este vizibil
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        //Code executes EVERY TIME user views the fragment
+
+        if (isVisibleToUser /*&& firstTimeVisible*/ ) {
+            //firstTimeVisible = false;
+//            try {
+//                getData();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 
@@ -82,28 +101,28 @@ public class ProgramarileMeleFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_lista_programari, container, false);
 
-        try {
-            getData();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewListaProgramari);
-        mRecycleViewAdaper = new ProgramariRecyclerViewAdapter(data);
+
+        data.add(new Programare(1, new Date(), 1,1,true));
+        mRecycleViewAdaper = new ProgramariRecyclerViewAdapter(context, data);
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mRecycleViewAdaper);
+
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+    @Override
+    public void onResume() {
+        super.onResume();
 
+//        try {
+//            getData();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
 
     public class SelectMethodAsync extends AsyncTask<String , Void ,String> {
         String server_response;
@@ -207,12 +226,7 @@ public class ProgramarileMeleFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
+        this.context = context;
     }
 
     @Override
