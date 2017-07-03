@@ -59,4 +59,5 @@
     <string name="dialog_ProgramareSterge_Mesaj">Doriti sa stergeti programarea?</string>
     <string name="da">Da</string>
     <string name="nu">Nu</string>
+    <string name="programare_adaugata">Programarea a fost adaugata!</string>
 </resources>

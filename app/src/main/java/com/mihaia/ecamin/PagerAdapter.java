@@ -96,7 +96,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 break;
         }
 
-        notifyDataSetChanged();
     }
 }
 

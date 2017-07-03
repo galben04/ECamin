@@ -14,22 +14,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mihaia.ecamin.DataContracts.Programare;
 
+import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 
@@ -49,6 +53,8 @@ public class ProgramareNouaFragemnt extends Fragment {
 
     Button btnTrimite;
     TextView textViewIdMasina, textViewIdUser;
+
+    Context context;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -94,13 +100,14 @@ public class ProgramareNouaFragemnt extends Fragment {
                 Programare newItem = new Programare();
                 newItem.Id_User  = (Integer.valueOf(textViewIdUser.getText().toString()));
                 newItem.Id_Masina = Integer.valueOf(textViewIdMasina.getText().toString());
-                newItem.Data_Ora = new Timestamp(new GregorianCalendar().getTimeInMillis());
+                newItem.Data_Ora = new Date();
                 newItem.IsDel = false;
 
                 new InsertMethodAsync().execute(newItem);
             }
         });
 
+        this.context = getContext();
         return view;
     }
 
@@ -114,24 +121,23 @@ public class ProgramareNouaFragemnt extends Fragment {
             URL url;
             HttpURLConnection urlConnection = null;
 
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setDateFormat("dd MM yyyy HH:mm:ssXXX").create();
 
             String jsonString = gson.toJson(programari[0]);
 
-            JSONObject jsonObject = new JSONObject();
+//            JSONObject jsonObject = new JSONObject();
+//            try {
+//                jsonObject.put("Data_Ora", "\\/Date(1497884881680+0300)\\/");
+//                jsonObject.put("Id_Masina", 1);
+//                jsonObject.put("Id_User", 1);
+//                jsonObject.put("IsDel", false);
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+
             try {
-                jsonObject.put("Data_Ora", "\\/Date(1497884881680+0300)\\/");
-                jsonObject.put("Id_Masina", 1);
-                jsonObject.put("Id_User", 1);
-                jsonObject.put("IsDel", false);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-            try {
-                url = new URL("http://192.168.0.129:51133/Programari/Insert");
+                url = new URL("http://192.168.1.78:51133/Programari/Insert");
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 urlConnection.setReadTimeout(10 * 1000);
@@ -144,7 +150,7 @@ public class ProgramareNouaFragemnt extends Fragment {
 
                 // Post Json
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
-                outputStreamWriter.write(jsonObject.toString());
+                outputStreamWriter.write(jsonString);
                 outputStreamWriter.close();
 
                 // Receive Response from server
@@ -169,6 +175,7 @@ public class ProgramareNouaFragemnt extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
+            Toast.makeText(context, R.string.programare_adaugata, Toast.LENGTH_LONG).show();
 //             //Programari programari = null;
 //            String JSON  = gson.toJson(programare);
 //            Type collectionType = new TypeToken<ArrayList<Programare>>(){}.getType();

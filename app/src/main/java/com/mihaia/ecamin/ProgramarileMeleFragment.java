@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mihaia.ecamin.DataContracts.Programare;
@@ -103,8 +104,13 @@ public class ProgramarileMeleFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewListaProgramari);
 
-        data.add(new Programare(1, new Date(), 1,1,true));
-        mRecycleViewAdaper = new ProgramariRecyclerViewAdapter(context, data);
+        //data.add(new Programare(1, new Date(), 1,1,true));
+        try {
+            getData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mRecycleViewAdaper = new ProgramariRecyclerViewAdapter(this.getContext(), data);
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -130,10 +136,11 @@ public class ProgramarileMeleFragment extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
 
-            URL url;
-            HttpURLConnection urlConnection = null;
 
             try {
+                URL url;
+                HttpURLConnection urlConnection = null;
+
                 url = new URL(strings[0]);
                 urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -144,10 +151,11 @@ public class ProgramarileMeleFragment extends Fragment {
                 urlConnection.connect();
 
                 int responseCode = urlConnection.getResponseCode();
-                Log.d("debug", "The response is: " + responseCode);
+                Log.d("Response from server:", String.valueOf(responseCode));
+
                 if(responseCode == HttpURLConnection.HTTP_OK){
                     server_response = readStream(urlConnection.getInputStream());
-                    Log.v("CatalogClient", server_response);
+                    Log.d("Response Stream:", server_response);
                 }
 
             } catch (MalformedURLException e) {
@@ -164,7 +172,7 @@ public class ProgramarileMeleFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            Gson gson =  new Gson();
+            Gson gson =  new GsonBuilder().setDateFormat("dd MM yyyy HH:mm:ssXXX").create();
             Programare programare = new Programare();
 //            programare.Data_Ora = new Date();
 //            programare.Id_Masina = 1;
@@ -173,20 +181,20 @@ public class ProgramarileMeleFragment extends Fragment {
 //            programare.Id_Programare = 1;
 
             //Programari programari = null;
-            String JSON  = gson.toJson(programare);
+            //String JSON  = gson.toJson(programare);
 
-//            Type collectionType = new TypeToken<ArrayList<Programare>>(){}.getType();
-//            Collection<Programare> programari = null;
+            Type collectionType = new TypeToken<ArrayList<Programare>>(){}.getType();
+            Collection<Programare> programari = null;
             Programare p1 = null;
             try {
-                p1 = gson.fromJson(server_response,Programare.class);
+                programari = gson.fromJson("[{\"Data_Ora\":\"03 07 2017 15:53:10+03:00\",\"Id_Masina\":1,\"Id_Programare\":21,\"Id_User\":1,\"IsDel\":false}]", collectionType);
             }catch(IllegalStateException | JsonSyntaxException exception){
                 exception.printStackTrace();
             }
 
-            data.add(p1);
-              //  data.addAll((Collection<? extends Programare>) programari);
-            Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_LONG);
+            //data.add(p1);
+                data.addAll((Collection<? extends Programare>) programari);
+            Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_LONG).show();
             Log.e("Response", "" + server_response);
 
 
@@ -195,7 +203,7 @@ public class ProgramarileMeleFragment extends Fragment {
 
 
     private void getData() throws IOException {
-        new SelectMethodAsync().execute("http://192.168.192.1:51133/Programari(1)");
+        new SelectMethodAsync().execute("http://192.168.1.78:51133/Programari/All");
     }
 
 

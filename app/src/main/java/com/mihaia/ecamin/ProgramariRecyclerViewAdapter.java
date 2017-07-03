@@ -96,8 +96,10 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
         holder.IdUser.setText(String.valueOf(mDataset.get(poz).Id_User));
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm");
-        holder.data.setText(dateFormat.format(mDataset.get(poz).Data_Ora));
-
+        if(mDataset.get(poz).Data_Ora != null)
+            holder.data.setText(dateFormat.format(mDataset.get(poz).Data_Ora));
+        else
+            holder.data.setText("null");
 
         if(mDataset.get(poz).IsDel == true)
             holder.IsDel.setText("1");
