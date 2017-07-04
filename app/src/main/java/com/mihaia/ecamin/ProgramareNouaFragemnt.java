@@ -1,6 +1,8 @@
 package com.mihaia.ecamin;
 
 import android.content.Context;
+import android.content.res.Resources;
+import java.util.Calendar;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,7 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +30,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -53,8 +60,10 @@ public class ProgramareNouaFragemnt extends Fragment {
 
     Button btnTrimite;
     TextView textViewIdMasina, textViewIdUser;
+    Spinner spinnerData, spinnerOra;
 
     Context context;
+    ArrayList<String> spinnnerDataValues;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -92,18 +101,34 @@ public class ProgramareNouaFragemnt extends Fragment {
         textViewIdMasina = (TextView) view.findViewById(R.id.tv_ProgramareNoua_IdMasina);
         textViewIdUser = (TextView) view.findViewById(R.id.tv_ProgramareNoua_IdUser);
 
-        btnTrimite = (Button) view.findViewById(R.id.btn_ProgramareNoua_Trimite);
+        spinnerData = (Spinner) view.findViewById(R.id.spinner_ProgramareNoua_Data);
+        spinnerOra = (Spinner) view.findViewById(R.id.spinner_ProgramareNoua_Ora);
+        spinnerData.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(parent.getContext(),
+                        "OnItemSelectedListener : " + parent.getItemAtPosition(position).toString(),
+                        Toast.LENGTH_SHORT).show();
 
+                String[] dateParts = parent.getItemAtPosition(position).toString().split(".");
+                new GetAsyncTask<Integer>("OreLibere").execute(dateParts[0], dateParts[1], dateParts[2]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        populareSpinnerData();
+
+        btnTrimite = (Button) view.findViewById(R.id.btn_ProgramareNoua_Trimite);
         btnTrimite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Programare newItem = new Programare();
-                newItem.Id_User  = (Integer.valueOf(textViewIdUser.getText().toString()));
-                newItem.Id_Masina = Integer.valueOf(textViewIdMasina.getText().toString());
-                newItem.Data_Ora = new Date();
-                newItem.IsDel = false;
 
-                new InsertMethodAsync().execute(newItem);
+                Programare newItem = getProgramareFromForm();
+
+                new InsertAsyncTask<Programare>("Progrmari").execute(new Programare());
             }
         });
 
@@ -111,85 +136,32 @@ public class ProgramareNouaFragemnt extends Fragment {
         return view;
     }
 
+    private void populareSpinnerData() {
+        spinnnerDataValues = new ArrayList<String>();
+        spinnnerDataValues.add(getResources().getString(R.string.select_data));
 
-    public class InsertMethodAsync extends AsyncTask<Programare , Void ,String> {
-        String server_response;
+        GregorianCalendar calendar = new GregorianCalendar();
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM.YYYY");
+        spinnnerDataValues.add(df.format(calendar.getTime()));
 
-        @Override
-        protected String doInBackground(Programare... programari) {
-
-            URL url;
-            HttpURLConnection urlConnection = null;
-
-            Gson gson = new GsonBuilder().setDateFormat("dd MM yyyy HH:mm:ssXXX").create();
-
-            String jsonString = gson.toJson(programari[0]);
-
-//            JSONObject jsonObject = new JSONObject();
-//            try {
-//                jsonObject.put("Data_Ora", "\\/Date(1497884881680+0300)\\/");
-//                jsonObject.put("Id_Masina", 1);
-//                jsonObject.put("Id_User", 1);
-//                jsonObject.put("IsDel", false);
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-
-            try {
-                url = new URL("http://192.168.1.78:51133/Programari/Insert");
-                urlConnection = (HttpURLConnection) url.openConnection();
-
-                urlConnection.setReadTimeout(10 * 1000);
-                urlConnection.setConnectTimeout(10 * 1000);
-                urlConnection.setRequestMethod("POST");
-                urlConnection.setRequestProperty("Content-Type", "application/json");
-                urlConnection.setRequestProperty("Accept", "application/json");
-
-                urlConnection.connect();
-
-                // Post Json
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
-                outputStreamWriter.write(jsonString);
-                outputStreamWriter.close();
-
-                // Receive Response from server
-                int statusCode = urlConnection.getResponseCode();
-                Log.d("debug", "The response is: " + statusCode);
-
-                if(statusCode == HttpURLConnection.HTTP_OK){
-                    server_response = ProgramarileMeleFragment.readStream(urlConnection.getInputStream());
-                    Log.v("CatalogClient", server_response);
-                }
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
+        for(int i=0; i < 8; i++) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            spinnnerDataValues.add(df.format(calendar.getTime()));
         }
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                 android.R.layout.simple_spinner_item, spinnnerDataValues);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerData.setAdapter(adapter);
+    }
 
-            Toast.makeText(context, R.string.programare_adaugata, Toast.LENGTH_LONG).show();
-//             //Programari programari = null;
-//            String JSON  = gson.toJson(programare);
-//            Type collectionType = new TypeToken<ArrayList<Programare>>(){}.getType();
-//            Collection<Programare> programari = null;
-//            try {
-//                programari = gson.fromJson(server_response,collectionType);
-//            }catch(IllegalStateException | JsonSyntaxException exception){
-//                exception.printStackTrace();
-//            }
-//
-//            data.addAll((Collection<? extends Programare>) programari);
-//            Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_LONG);
-//            Log.e("Response", "" + server_response);
-        }
+    private Programare getProgramareFromForm() {
+        Programare p = new Programare();
+        p.Id_User = 1;
+        p.Id_Masina  = 1;
+        p.IsDel = false;
+
+        return p;
     }
 
 

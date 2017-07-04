@@ -15,6 +15,10 @@ public class Programare {
 
     public int Id_Programare;
 
+    public Date getData_Ora() {
+        return Data_Ora;
+    }
+
     public Date Data_Ora;
 
     public int Id_Masina;

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,18 +28,21 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
 
     private Context context;
     private List<Programare> mDataset;
+    public ProgramariRecyclerViewAdapter ReftoThis;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView IdProgramare, data, IdUser, IdMasina;
         public TextView IsDel;
         public ImageButton btnDetalii, btnDelete;
         public TableLayout layoutDetalii;
-        //TextView ziPlata, lunaPlata, ziScadenta, lunaScadenta;
+        public TableRow tableRowSus;
+
 
         public ViewHolder(View view) {
             super(view);
 
             layoutDetalii = (TableLayout) view.findViewById(R.id.tableLayoutProgramari_Detalii);
+            tableRowSus = (TableRow) view.findViewById(R.id.tableRow_Vizibil);
 
             btnDetalii = (ImageButton) view.findViewById(R.id.iBtnProgramari_Detalii);
             btnDelete = (ImageButton) view.findViewById(R.id.iBtnProgramari_Delete);
@@ -51,20 +55,33 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
 
             layoutDetalii.setVisibility(View.GONE);
 
-            btnDetalii.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(layoutDetalii.getVisibility() == View.VISIBLE){
-                        layoutDetalii.setVisibility(View.GONE);
-                        btnDetalii.setBackgroundResource(R.drawable.more_24);
-                    } else {
-                        layoutDetalii.setVisibility(View.VISIBLE);
-                        btnDetalii.setBackgroundResource(R.drawable.less_24);
-                    }
+            btnDetalii.setOnClickListener(onClickListenerExtinde);
+            tableRowSus.setOnClickListener(onClickListenerExtinde);
+        }
+
+        View.OnClickListener onClickListenerExtinde =new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(layoutDetalii.getVisibility() == View.VISIBLE){
+                    layoutDetalii.setVisibility(View.GONE);
+                    btnDetalii.setBackgroundResource(R.drawable.more_24);
+                } else {
+                    layoutDetalii.setVisibility(View.VISIBLE);
+                    btnDetalii.setBackgroundResource(R.drawable.less_24);
                 }
-            });
 
+            }
+        };
 
+        private void extindeLayoutDetaliii()
+        {
+            if(layoutDetalii.getVisibility() == View.VISIBLE){
+                layoutDetalii.setVisibility(View.GONE);
+                btnDetalii.setBackgroundResource(R.drawable.more_24);
+            } else {
+                layoutDetalii.setVisibility(View.VISIBLE);
+                btnDetalii.setBackgroundResource(R.drawable.less_24);
+            }
         }
     }
 
@@ -72,13 +89,13 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
     public ProgramariRecyclerViewAdapter(Context context,List<Programare> dataset) {
         this.context = context;
         mDataset = dataset;
+        this.ReftoThis = this;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
     public ProgramariRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                              int viewType) {
-        // create a new view
         View v = (View) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.element_lista_programari, parent, false);
 
@@ -89,7 +106,7 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ProgramariRecyclerViewAdapter.ViewHolder holder, int poz) {
+    public void onBindViewHolder(ProgramariRecyclerViewAdapter.ViewHolder holder, final int poz) {
 
         holder.IdProgramare.setText(String.valueOf(mDataset.get(poz).Id_Programare));
         holder.IdMasina.setText(String.valueOf(mDataset.get(poz).Id_Masina));
@@ -116,14 +133,31 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
 
                 builder.setPositiveButton(R.string.da, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(context, "A ales Da", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "A ales Da", Toast.LENGTH_SHORT).show();
+                        new DeleteAsyncTask() {
+                            @Override
+                            protected void onPostExecute(Integer integer) {
+                                super.onPostExecute(integer);
+                                if(integer == 1)
+                                {
+                                    Toast.makeText(context, R.string.programare_anulata, Toast.LENGTH_SHORT).show();
+                                    //ReftoThis.notifyDataSetChanged();
+                                }
+
+                                else
+                                {
+                                    Toast.makeText(context, R.string.eroare_anulare_programare, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }.execute("Programari", String.valueOf(mDataset.get(poz).Id_Programare));
+
                         dialog.dismiss();
                     }
                 });
 
                 builder.setNegativeButton(R.string.nu, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(context, "A ales Nu", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.anulare_stergere_programare, Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });

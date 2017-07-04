@@ -41,6 +41,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import static com.mihaia.ecamin.Utils.readStream;
+
 
 public class ProgramarileMeleFragment extends Fragment {
 //    // TODO: Rename parameter arguments, choose names that match
@@ -172,29 +174,25 @@ public class ProgramarileMeleFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            Gson gson =  new GsonBuilder().setDateFormat("dd MM yyyy HH:mm:ssXXX").create();
+            Gson gson =  new GsonBuilder().setDateFormat("dd MM yyyy HHXXX").create();
             Programare programare = new Programare();
-//            programare.Data_Ora = new Date();
-//            programare.Id_Masina = 1;
-//            programare.Id_User = 1;
-//            programare.IsDel = false;
-//            programare.Id_Programare = 1;
 
-            //Programari programari = null;
-            //String JSON  = gson.toJson(programare);
 
             Type collectionType = new TypeToken<ArrayList<Programare>>(){}.getType();
             Collection<Programare> programari = null;
             Programare p1 = null;
             try {
-                programari = gson.fromJson("[{\"Data_Ora\":\"03 07 2017 15:53:10+03:00\",\"Id_Masina\":1,\"Id_Programare\":21,\"Id_User\":1,\"IsDel\":false}]", collectionType);
+                programari = gson.fromJson(server_response, collectionType);
             }catch(IllegalStateException | JsonSyntaxException exception){
                 exception.printStackTrace();
             }
 
             //data.add(p1);
+            if(programari != null)
                 data.addAll((Collection<? extends Programare>) programari);
-            Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_LONG).show();
+
+                mRecycleViewAdaper.notifyDataSetChanged();
+            Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_SHORT).show();
             Log.e("Response", "" + server_response);
 
 
@@ -207,28 +205,7 @@ public class ProgramarileMeleFragment extends Fragment {
     }
 
 
-    public static String readStream(InputStream in) {
-        BufferedReader reader = null;
-        StringBuffer response = new StringBuffer();
-        try {
-            reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return response.toString();
-    }
+
 
 
     @Override

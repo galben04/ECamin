@@ -60,4 +60,8 @@
     <string name="da">Da</string>
     <string name="nu">Nu</string>
     <string name="programare_adaugata">Programarea a fost adaugata!</string>
+    <string name="anulare_stergere_programare">Stergerea programarii anulata</string>
+    <string name="programare_anulata">Programarea a fost anulata!</string>
+    <string name="eroare_anulare_programare">Eroare la anularea programarii! Incercati din nou</string>
+    <string name="select_data">Alegeti data programarii</string>
 </resources>
