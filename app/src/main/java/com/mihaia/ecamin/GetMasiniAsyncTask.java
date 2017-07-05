@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Programare;
 
 import java.io.IOException;
@@ -24,25 +25,28 @@ import static com.mihaia.ecamin.Utils.readStream;
  * Created by mihaia on 7/4/2017.
  */
 
-public class GetAsyncTask extends AsyncTask<String , Void ,Collection<Integer>> {
+public class GetMasiniAsyncTask extends AsyncTask<String , Void ,Collection<Masina_Spalat>> {
     String server_response;
     String section;
 
-    public GetAsyncTask(String section) {
+    public GetMasiniAsyncTask(String section) {
         this.section = section;
     }
 
     @Override
-    protected Collection<Integer> doInBackground(String... strings) {
+    protected Collection<Masina_Spalat> doInBackground(String... strings) {
 
-        Type collectionType = new TypeToken<ArrayList<Integer>>(){}.getType();
-        Collection<Integer> ore = null;
+        Type collectionType = new TypeToken<ArrayList<Masina_Spalat>>(){}.getType();
+        Collection<Masina_Spalat> data = null;
 
+        if(strings.length < 3)
+            return null;
+        
         try {
             URL url;
             HttpURLConnection urlConnection = null;
 
-            url = new URL(Utils.URLConectare + section + "/" + strings[0] + "," + strings[1] + "," + strings[2]);
+            url = new URL(Utils.URLConectare + section + "/" + strings[0] + "," + strings[1] + "," + strings[2] + "/" + strings[3]);
             urlConnection = (HttpURLConnection) url.openConnection();
 
             urlConnection.setReadTimeout(10 * 1000);
@@ -58,12 +62,11 @@ public class GetAsyncTask extends AsyncTask<String , Void ,Collection<Integer>> 
 
                 Gson gson =  new GsonBuilder().setDateFormat("dd MM yyyy HHXXX").create();
                 try {
-                    ore = gson.fromJson(server_response, collectionType);
+                    data = gson.fromJson(server_response, collectionType);
                 }catch(IllegalStateException | JsonSyntaxException exception){
                     exception.printStackTrace();
                 }
 
-                urlConnection.disconnect();
                 Log.d("Response Stream:", server_response);
             }
 
@@ -73,7 +76,7 @@ public class GetAsyncTask extends AsyncTask<String , Void ,Collection<Integer>> 
             e.printStackTrace();
         }
 
-        return ore;
+        return data;
     }
 
 

@@ -64,4 +64,8 @@
     <string name="programare_anulata">Programarea a fost anulata!</string>
     <string name="eroare_anulare_programare">Eroare la anularea programarii! Incercati din nou</string>
     <string name="select_data">Alegeti data programarii</string>
+    <string name="select_ora">Alegeti ora</string>
+    <string name="eroare_data_programare">Eroare! Selectati o data valida</string>
+    <string name="select_masina">Selectati Masina de spalat</string>
+    <string name="optional">Optional:</string>
 </resources>

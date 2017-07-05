@@ -2,11 +2,14 @@ package com.mihaia.ecamin;
 
 import android.content.Context;
 import android.content.res.Resources;
+
+import java.util.Arrays;
 import java.util.Calendar;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.TextViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Programare;
 
 import org.joda.time.DateTime;
@@ -42,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 
 /**
@@ -59,8 +64,8 @@ public class ProgramareNouaFragemnt extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     Button btnTrimite;
-    TextView textViewIdMasina, textViewIdUser;
-    Spinner spinnerData, spinnerOra;
+    TextView textViewIdMasina, textViewIdUser, tvOptional;
+    Spinner spinnerData, spinnerOra, spinnerMasina;
 
     Context context;
     ArrayList<String> spinnnerDataValues;
@@ -98,20 +103,40 @@ public class ProgramareNouaFragemnt extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_programare_noua, container, false);
 
-        textViewIdMasina = (TextView) view.findViewById(R.id.tv_ProgramareNoua_IdMasina);
-        textViewIdUser = (TextView) view.findViewById(R.id.tv_ProgramareNoua_IdUser);
+//        textViewIdMasina = (TextView) view.findViewById(R.id.tv_ProgramareNoua_IdMasina);
+//        textViewIdUser = (TextView) view.findViewById(R.id.tv_ProgramareNoua_IdUser);
+        tvOptional = (TextView) view.findViewById(R.id.tv_optional);
 
         spinnerData = (Spinner) view.findViewById(R.id.spinner_ProgramareNoua_Data);
         spinnerOra = (Spinner) view.findViewById(R.id.spinner_ProgramareNoua_Ora);
+        spinnerMasina = (Spinner) view.findViewById(R.id.spinner_ProgramareNoua_Masina);
+
+        spinnerMasina.setVisibility(View.GONE);
+        tvOptional.setVisibility(View.GONE);
+
         spinnerData.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(parent.getContext(),
-                        "OnItemSelectedListener : " + parent.getItemAtPosition(position).toString(),
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(parent.getContext(),
+//                        "OnItemSelectedListener : " + parent.getItemAtPosition(position).toString(),
+//                        Toast.LENGTH_SHORT).show();
+                spinnerOra.setEnabled(false);
+                spinnerMasina.setVisibility(View.GONE);
+                tvOptional.setVisibility(View.GONE);
 
-                String[] dateParts = parent.getItemAtPosition(position).toString().split(".");
-                new GetAsyncTask<Integer>("OreLibere").execute(dateParts[0], dateParts[1], dateParts[2]);
+                if(position > 0) {
+                    String[] dateParts = (parent.getItemAtPosition(position).toString()).split("\\.");
+                    new GetAsyncTask("Programari/OreLibere"){
+                        @Override
+                        protected void onPostExecute(Collection<Integer> ore) {
+                            super.onPostExecute(ore);
+
+                            if(ore != null)
+                                populareSpinnerOreDisponibile(ore);
+
+                        }
+                    }.execute(dateParts[0], dateParts[1], dateParts[2]);
+                }
             }
 
             @Override
@@ -119,6 +144,39 @@ public class ProgramareNouaFragemnt extends Fragment {
 
             }
         });
+
+
+        spinnerOra.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(position > 0) {
+                    String data = spinnerData.getSelectedItem().toString();
+                    String[] dateParts = data.split("\\.");
+                    if(dateParts.length < 3) {
+                        Toast.makeText(parent.getContext(),
+                                 getResources().getText(R.string.eroare_data_programare), Toast.LENGTH_SHORT).show();
+                    } else {
+                        new GetMasiniAsyncTask("Programari/MasiniLibere") {
+                            @Override
+                            protected void onPostExecute(Collection<Masina_Spalat> masini) {
+                                super.onPostExecute(masini);
+
+                                if (masini != null)
+                                    populareSpinnerMasiniDisponibile(masini);
+
+                            }
+                        }.execute(dateParts[0], dateParts[1], dateParts[2], parent.getItemAtPosition(position).toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         populareSpinnerData();
 
         btnTrimite = (Button) view.findViewById(R.id.btn_ProgramareNoua_Trimite);
@@ -136,10 +194,12 @@ public class ProgramareNouaFragemnt extends Fragment {
         return view;
     }
 
+
     private void populareSpinnerData() {
         spinnnerDataValues = new ArrayList<String>();
         spinnnerDataValues.add(getResources().getString(R.string.select_data));
 
+        spinnnerDataValues.add("03.07.2017");
         GregorianCalendar calendar = new GregorianCalendar();
         SimpleDateFormat df = new SimpleDateFormat("dd.MM.YYYY");
         spinnnerDataValues.add(df.format(calendar.getTime()));
@@ -155,10 +215,51 @@ public class ProgramareNouaFragemnt extends Fragment {
         spinnerData.setAdapter(adapter);
     }
 
+
+    private void populareSpinnerOreDisponibile(Collection<Integer> ore) {
+        spinnerOra.setEnabled(true);
+
+        ////Pregatim lista orele libere
+        ArrayList<String> spinnerOreValues = new ArrayList<String>();
+        spinnerOreValues.add(getResources().getString(R.string.select_ora));
+
+        for (Integer i: ore) {
+            spinnerOreValues.add(String.valueOf(i));
+        }
+
+        ///Setam adaptorul pentru spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                android.R.layout.simple_spinner_item, spinnerOreValues);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOra.setAdapter(adapter);
+    }
+
+
+    public void populareSpinnerMasiniDisponibile(Collection<Masina_Spalat> masini) {
+        spinnerMasina.setVisibility(View.VISIBLE);
+        tvOptional.setVisibility(View.VISIBLE);
+
+        ArrayList<String> spinnerMasiniValues = new ArrayList<String>();
+        spinnerMasiniValues.add(getResources().getString(R.string.select_masina));
+
+        for (Masina_Spalat i: masini) {
+            spinnerMasiniValues.add(i.Id_Masina + ". " + i.Nume + " - Etaj " + i.Etaj);
+        }
+
+        ///Setam adaptorul pentru spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                android.R.layout.simple_spinner_item, spinnerMasiniValues);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMasina.setAdapter(adapter);
+    }
+
     private Programare getProgramareFromForm() {
         Programare p = new Programare();
+        
         p.Id_User = 1;
-        p.Id_Masina  = 1;
+        p.Id_Masina  = Integer.valueOf(spinnerMasina.getSelectedItem().toString().split("\\.")[0]);
         p.IsDel = false;
 
         return p;

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="programare_adaugata" type="id">Programare adaugata cu succes!</item>
+    <item name="eroare_data_programare" type="id">Eroare, selectati o data valida!</item>
 </resources>

@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mihaia.ecamin.ProgramareNouaFragemnt">
+    tools:context="com.mihaia.ecamin.ProgramareNouaFragemnt"
+    android:baselineAligned="false">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,22 +52,27 @@
          android:id="@+id/spinner_ProgramareNoua_Ora">
       </Spinner>
 
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:hint="Id User"
-        android:id="@+id/tv_ProgramareNoua_IdUser"/>
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/optional"
+            android:id="@+id/tv_optional"
+            />
 
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:hint="Id Masina"
-        android:paddingLeft="5dp"
-        android:paddingRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/tv_ProgramareNoua_IdMasina"
-        />
+        <Spinner android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:entries="@array/spinnerItems"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            style="@style/Spinner"
+            android:spinnerMode="dropdown"
+            android:id="@+id/spinner_ProgramareNoua_Masina"
+            >
+        </Spinner>
+
 
     <Button
         android:layout_width="match_parent"
