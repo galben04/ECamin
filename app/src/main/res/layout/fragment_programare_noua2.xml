@@ -1,0 +1,125 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mihaia.ecamin.ProgramareNouaFragemnt"
+    android:baselineAligned="false"
+    android:background="@color/background_gri">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        style="@style/Container"
+        android:background="@color/alb"
+        android:layout_margin= "@dimen/activity_horizontal_margin">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/programare_noua_titlu"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@color/albastruLogo"
+            android:layout_marginBottom="5dp" />
+
+        <View
+            android:layout_width="match_parent"
+            style="@style/LinieSepMare"
+            ></View>
+
+        <Spinner android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:entries="@array/spinnerItems"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="5dp"
+            style="@style/Spinner"
+            android:spinnerMode="dropdown"
+            android:id="@+id/spinner_ProgNoua_Data"
+            android:background="@color/portocaliuING">
+        </Spinner>
+<!-- jsjjdjdjdjdjdjdjjdjddjdjdjjdjdjdjdjdjdjdjdjdjdjddjdj-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.8"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:background="@color/alb"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/scrollView_ProgNoua_Ora"
+                android:layout_weight="0.6"
+                android:layout_marginRight="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:text="Ora:"
+                    android:textStyle="bold" />
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/listview_ProgNoua_Ora"
+                    android:background="@color/background_gri">
+                </ListView>
+
+            </LinearLayout>
+<View
+    android:layout_width="15dp"
+    android:layout_height="match_parent"></View>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/scrollView_ProgNoua_Masini"
+                android:layout_weight="1.4"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="40dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:text="(Optional) Masina de Spalat:"
+                    android:textStyle="bold"/>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/background_gri"
+                    android:id="@+id/listview_ProgNoua_Masini">
+
+                </ListView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+            <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+                android:layout_weight="0.2"
+            android:background="#F2EC2C"
+            android:text="@string/button_trimite"
+            style="@style/textNormal"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_ProgramareNoua_Trimite"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
