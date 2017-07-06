@@ -85,7 +85,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
             case Programari:
                 tab1 = new ProgramarileMeleFragment();
-                tab2 = new ProgramareNouaFragemnt();
+                tab2 = new ProgramareNouaFragment2();
                 tab3 = null;
                 break;
 

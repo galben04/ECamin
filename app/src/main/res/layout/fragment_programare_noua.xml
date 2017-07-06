@@ -74,6 +74,25 @@
         </Spinner>
 
 
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="27.05.2017"
+            android:id="@+id/Spinner1">
+
+        </Spinner>
+
+        <Spinner
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="18:00"
+            android:id="@+id/Spinner2">
+
+        </Spinner>
+
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

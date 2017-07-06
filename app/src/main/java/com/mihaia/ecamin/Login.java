@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.mihaia.ecamin.localDB.UtilizatoriDB;
 
+import static com.mihaia.ecamin.localDB.DBHelper.context;
+
 public class Login extends AppCompatActivity {
 
     Button butContNou, butLogin;
@@ -27,7 +29,10 @@ public class Login extends AppCompatActivity {
         butLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+               // login();
+                Intent intent = new Intent(context, PaginaPrincipala.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
 

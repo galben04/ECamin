@@ -20,9 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-/**
- * Created by Mihai on 6/21/2017.
- */
 
 public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<ProgramariRecyclerViewAdapter.ViewHolder>{
 
@@ -169,7 +166,6 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
 
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mDataset.size();

@@ -139,7 +139,7 @@ public class ProgramarileMeleFragment extends Fragment {
         protected String doInBackground(String... strings) {
 
 
-            try {
+/*            try {
                 URL url;
                 HttpURLConnection urlConnection = null;
 
@@ -164,7 +164,7 @@ public class ProgramarileMeleFragment extends Fragment {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
 
             return null;
         }
@@ -201,7 +201,7 @@ public class ProgramarileMeleFragment extends Fragment {
 
 
     private void getData() throws IOException {
-        new SelectMethodAsync().execute("http://192.168.1.78:51133/Programari/All");
+//        new SelectMethodAsync().execute("http://192.168.1.78:51133/Programari/All");
     }
 
 
