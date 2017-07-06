@@ -257,7 +257,7 @@ public class ProgramareNouaFragemnt extends Fragment {
 
     private Programare getProgramareFromForm() {
         Programare p = new Programare();
-        
+
         p.Id_User = 1;
         p.Id_Masina  = Integer.valueOf(spinnerMasina.getSelectedItem().toString().split("\\.")[0]);
         p.IsDel = false;
