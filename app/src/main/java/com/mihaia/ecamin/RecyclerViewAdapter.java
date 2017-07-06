@@ -88,8 +88,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int poz) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
+
         holder.lunaTitlu.setText(mDataset.get(poz).getLuna());
         holder.sumaTitlu.setText(mDataset.get(poz).getSuma().toString());
         

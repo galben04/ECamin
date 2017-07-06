@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.mihaia.ecamin.AsyncTaskuri.LoginAsyncTask;
 import com.mihaia.ecamin.localDB.UtilizatoriDB;
 
 import static com.mihaia.ecamin.localDB.DBHelper.context;

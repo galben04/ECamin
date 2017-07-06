@@ -39,6 +39,25 @@
             android:id="@+id/spinner_ProgNoua_Data"
             android:background="@color/portocaliuING">
         </Spinner>
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="left"-->
+                <!--android:text="Ora: 15"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="right"-->
+                <!--android:text="Masina 1"/>-->
+        <!--</LinearLayout>-->
 <!-- jsjjdjdjdjdjdjdjjdjddjdjdjjdjdjdjdjdjdjdjdjdjdjddjdj-->
         <LinearLayout
             android:orientation="vertical"
@@ -73,10 +92,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/listview_ProgNoua_Ora"
-                    android:background="@color/background_gri">
+                    android:background="@drawable/background_list_item">
                 </ListView>
 
             </LinearLayout>
+
 <View
     android:layout_width="15dp"
     android:layout_height="match_parent"></View>
@@ -88,7 +108,7 @@
                 android:layout_weight="1.4"
                 android:layout_marginLeft="10dp"
                 android:orientation="vertical"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp">
 
                 <TextView
@@ -118,7 +138,7 @@
             android:text="@string/button_trimite"
             style="@style/textNormal"
             android:layout_marginTop="10dp"
-            android:id="@+id/btn_ProgramareNoua_Trimite"/>
+            android:id="@+id/btn_ProgNoua_Trimite"/>
 
         </LinearLayout>
     </LinearLayout>

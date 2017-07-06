@@ -1,16 +1,11 @@
 package com.mihaia.ecamin;
 
 import android.content.Context;
-import android.content.res.Resources;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.TextViewCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,32 +16,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
+import com.mihaia.ecamin.AsyncTaskuri.GetAsyncTask;
+import com.mihaia.ecamin.AsyncTaskuri.GetMasiniAsyncTask;
+import com.mihaia.ecamin.AsyncTaskuri.InsertAsyncTask;
 import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Programare;
 
-import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 
 /**
@@ -210,7 +189,7 @@ public class ProgramareNouaFragemnt extends Fragment {
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                 android.R.layout.simple_spinner_item, spinnnerDataValues);
+                android.R.layout.simple_spinner_item, spinnnerDataValues);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerData.setAdapter(adapter);
     }

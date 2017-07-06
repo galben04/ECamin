@@ -68,4 +68,5 @@
     <string name="eroare_data_programare">Eroare! Selectati o data valida</string>
     <string name="select_masina">Selectati Masina de spalat</string>
     <string name="optional">Optional:</string>
+    <string name="eroare_programare">Eroare! Nu au fost toate camputile selectate!</string>
 </resources>

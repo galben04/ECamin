@@ -1,4 +1,4 @@
-package com.mihaia.ecamin;
+package com.mihaia.ecamin.AsyncTaskuri;
 
 import android.content.Context;
 import android.os.AsyncTask;

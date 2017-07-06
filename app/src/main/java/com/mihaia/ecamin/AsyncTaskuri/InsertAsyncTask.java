@@ -1,4 +1,4 @@
-package com.mihaia.ecamin;
+package com.mihaia.ecamin.AsyncTaskuri;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mihaia.ecamin.DataContracts.Programare;
+import com.mihaia.ecamin.Utils;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -35,7 +36,7 @@ public class InsertAsyncTask<T> extends AsyncTask<T , Void ,Integer> {
         URL url;
         HttpURLConnection urlConnection = null;
 
-        Gson gson = new GsonBuilder().setDateFormat("dd MM yyyy HHXXX").create();
+        Gson gson = new GsonBuilder().setDateFormat("dd MM yyyy HH").create();
         String jsonString = gson.toJson(params[0]);
 
         try {

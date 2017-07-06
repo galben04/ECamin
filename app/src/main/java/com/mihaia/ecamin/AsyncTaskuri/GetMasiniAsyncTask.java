@@ -1,4 +1,4 @@
-package com.mihaia.ecamin;
+package com.mihaia.ecamin.AsyncTaskuri;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -10,6 +10,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Programare;
+import com.mihaia.ecamin.Utils;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

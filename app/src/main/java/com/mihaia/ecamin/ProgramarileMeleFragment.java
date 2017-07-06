@@ -60,6 +60,7 @@ public class ProgramarileMeleFragment extends Fragment {
     private List<Programare> data = new ArrayList<Programare>();
     private Context context;
 
+    private boolean isFirstTime = true;
     public ProgramarileMeleFragment() {
 
     }
@@ -86,15 +87,13 @@ public class ProgramarileMeleFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        //Code executes EVERY TIME user views the fragment
-
-        if (isVisibleToUser /*&& firstTimeVisible*/ ) {
-            //firstTimeVisible = false;
-//            try {
-//                getData();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+        if(isVisibleToUser) {
+            isFirstTime = false;
+            try {
+                getData();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -106,7 +105,7 @@ public class ProgramarileMeleFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewListaProgramari);
 
-        //data.add(new Programare(1, new Date(), 1,1,true));
+        data.add(new Programare(1, new Date(), 1,1,true));
         try {
             getData();
         } catch (IOException e) {
@@ -139,7 +138,7 @@ public class ProgramarileMeleFragment extends Fragment {
         protected String doInBackground(String... strings) {
 
 
-/*            try {
+            try {
                 URL url;
                 HttpURLConnection urlConnection = null;
 
@@ -164,7 +163,7 @@ public class ProgramarileMeleFragment extends Fragment {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }*/
+            }
 
             return null;
         }
@@ -174,7 +173,7 @@ public class ProgramarileMeleFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            Gson gson =  new GsonBuilder().setDateFormat("dd MM yyyy HHXXX").create();
+            Gson gson =  new GsonBuilder().setDateFormat("dd MM yyyy HH").create();
             Programare programare = new Programare();
 
 
@@ -188,20 +187,24 @@ public class ProgramarileMeleFragment extends Fragment {
             }
 
             //data.add(p1);
-            if(programari != null)
+            if(programari != null) {
                 data.addAll((Collection<? extends Programare>) programari);
 
                 mRecycleViewAdaper.notifyDataSetChanged();
-            Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_SHORT).show();
-            Log.e("Response", "" + server_response);
-
+                Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_SHORT).show();
+                Log.e("Response", "" + server_response);
+            }
 
         }
     }
 
 
     private void getData() throws IOException {
-//        new SelectMethodAsync().execute("http://192.168.1.78:51133/Programari/All");
+        if(mRecycleViewAdaper != null) {
+            mRecycleViewAdaper.clear();
+            mRecycleViewAdaper.notifyDataSetChanged();
+        }
+        new SelectMethodAsync().execute("http://192.168.1.78:51133/Programari/All");
     }
 
 

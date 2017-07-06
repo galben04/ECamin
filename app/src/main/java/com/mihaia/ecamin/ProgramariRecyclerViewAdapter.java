@@ -7,17 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mihaia.ecamin.AsyncTaskuri.DeleteAsyncTask;
 import com.mihaia.ecamin.DataContracts.Programare;
 
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -164,6 +163,13 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
             }
         });
 
+    }
+
+    public void clear()
+    {
+        int size = mDataset.size();
+        mDataset.clear();
+        this.notifyItemRangeRemoved(0, size);
     }
 
     @Override
