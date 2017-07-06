@@ -1,4 +1,4 @@
-package com.mihaia.ecamin;
+package com.mihaia.ecamin.Programari;
 
 import android.content.Context;
 
@@ -21,6 +21,7 @@ import com.mihaia.ecamin.AsyncTaskuri.GetMasiniAsyncTask;
 import com.mihaia.ecamin.AsyncTaskuri.InsertAsyncTask;
 import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Programare;
+import com.mihaia.ecamin.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

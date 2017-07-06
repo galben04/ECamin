@@ -1,11 +1,9 @@
-package com.mihaia.ecamin;
+package com.mihaia.ecamin.Programari;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -19,12 +17,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.mihaia.ecamin.AsyncTaskuri.DeleteAsyncTask;
 import com.mihaia.ecamin.AsyncTaskuri.GetAsyncTask;
 import com.mihaia.ecamin.AsyncTaskuri.GetMasiniAsyncTask;
 import com.mihaia.ecamin.AsyncTaskuri.InsertAsyncTask;
+import com.mihaia.ecamin.CustomArrayAdapter;
 import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Programare;
+import com.mihaia.ecamin.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -99,7 +98,40 @@ public class ProgramareNouaFragment2 extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), R.string.eroare_programare, Toast.LENGTH_SHORT);
                 } else {
                     Programare itemToInsert = getProgramareFromForm();
-                    taskInsertProgramare.execute(itemToInsert);
+                    new InsertAsyncTask<Programare>("Programari"){
+                        @Override
+                        protected void onPostExecute(Integer status) {
+                            super.onPostExecute(status);
+
+                            if(status == null || status != 1)
+                            {
+                                builder.setMessage("Eroare la comunicarea cu serverul!");
+                                builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                            }
+                            else if(status == 1)
+                            {
+
+                                builder.setMessage("Programarea a fost inserta cu succes!");
+                                builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                            }
+                        }
+                    }.execute(itemToInsert);
                 }
             }
         });
@@ -164,16 +196,21 @@ public class ProgramareNouaFragment2 extends Fragment {
 
             if(position > 0) {
                 String[] dateParts = (parent.getItemAtPosition(position).toString()).split("\\.");
-                new GetAsyncTask("Programari/OreLibere"){
-                    @Override
-                    protected void onPostExecute(Collection<Integer> ore) {
-                        super.onPostExecute(ore);
+                if(dateParts.length < 3) {
+                    Toast.makeText(parent.getContext(),
+                            getResources().getText(R.string.eroare_data_programare), Toast.LENGTH_SHORT).show();
+                } else {
+                    new GetAsyncTask("Programari/OreLibere"){
+                        @Override
+                        protected void onPostExecute(Collection<Integer> ore) {
+                            super.onPostExecute(ore);
 
-                        if(ore != null)
-                            populareSpinnerOreDisponibile(ore);
+                            if(ore != null)
+                                populareSpinnerOreDisponibile(ore);
 
-                    }
-                }.execute(dateParts[0], dateParts[1], dateParts[2]);
+                        }
+                    }.execute(dateParts[0], dateParts[1], dateParts[2]);
+                }
             }
         }
 
@@ -190,7 +227,7 @@ public class ProgramareNouaFragment2 extends Fragment {
 
         spinnnerDataValues.add("03.07.2017");
         GregorianCalendar calendar = new GregorianCalendar();
-        SimpleDateFormat df = new SimpleDateFormat("dd.MM.YYYY");
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
         spinnnerDataValues.add(df.format(calendar.getTime()));
 
         for(int i=0; i < 8; i++) {
@@ -271,40 +308,6 @@ public class ProgramareNouaFragment2 extends Fragment {
     }
 
 
-    InsertAsyncTask<Programare> taskInsertProgramare = new InsertAsyncTask<Programare>("Programari"){
-        @Override
-        protected void onPostExecute(Integer status) {
-            super.onPostExecute(status);
-
-            if(status == null || status != 1)
-            {
-                builder.setMessage("Eroare la comunicarea cu serverul!");
-                builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-            else if(status == 1)
-            {
-
-                builder.setMessage("Programarea a fost inserta cu succes!");
-                builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        }
-    };
 
     @Override
     public void onAttach(Context context) {

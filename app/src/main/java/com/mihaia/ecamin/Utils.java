@@ -18,7 +18,8 @@ public class Utils {
         Setari
     }
 
-    public static String URLConectare = "http://192.168.1.78:51133/";
+    public static String URLConectare = "http://192.168.0.129:51133/";
+    //"http://192.168.1.78:51133/";
 
     public static String readStream(InputStream in) {
         BufferedReader reader = null;

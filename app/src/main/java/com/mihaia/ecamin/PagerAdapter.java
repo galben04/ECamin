@@ -1,11 +1,14 @@
 package com.mihaia.ecamin;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.mihaia.ecamin.DataContracts.Programare;
+import com.mihaia.ecamin.Plangeri.PlangerileMeleFragment;
+import com.mihaia.ecamin.Plati.IstoricPlatiFragment;
+import com.mihaia.ecamin.Plati.PlataScadentaFragment;
+import com.mihaia.ecamin.Programari.ProgramareNouaFragment2;
+import com.mihaia.ecamin.Programari.ProgramarileMeleFragment;
 
 /**
  * Created by Mihai on 3/19/2017.
@@ -78,7 +81,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 break;
 
             case Plangeri:
-                tab1 = new PlataScadentaFragment();
+                tab1 = new PlangerileMeleFragment();
                 tab2 = new IstoricPlatiFragment();
                 tab3 = null;
                 break;

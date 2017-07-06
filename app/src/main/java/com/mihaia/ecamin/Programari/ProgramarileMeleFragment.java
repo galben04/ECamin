@@ -1,12 +1,10 @@
-package com.mihaia.ecamin;
+package com.mihaia.ecamin.Programari;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,25 +18,17 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mihaia.ecamin.DataContracts.Programare;
-import com.mihaia.ecamin.DataContracts.Programari;
+import com.mihaia.ecamin.R;
+import com.mihaia.ecamin.Utils;
 
-import org.joda.time.DateTime;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.Proxy;
 import java.net.URL;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import static com.mihaia.ecamin.Utils.readStream;
@@ -106,14 +96,14 @@ public class ProgramarileMeleFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewListaProgramari);
 
         data.add(new Programare(1, new Date(), 1,1,true));
-        try {
-            getData();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            getData();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         mRecycleViewAdaper = new ProgramariRecyclerViewAdapter(this.getContext(), data);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mRecycleViewAdaper);
 
@@ -204,7 +194,7 @@ public class ProgramarileMeleFragment extends Fragment {
             mRecycleViewAdaper.clear();
             mRecycleViewAdaper.notifyDataSetChanged();
         }
-        new SelectMethodAsync().execute("http://192.168.1.78:51133/Programari/All");
+        new SelectMethodAsync().execute(Utils.URLConectare + "Programari/All");
     }
 
 

@@ -1,0 +1,213 @@
+package com.mihaia.ecamin.Plangeri;
+
+import android.content.Context;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import com.mihaia.ecamin.DataContracts.Plangere;
+import com.mihaia.ecamin.DataContracts.Programare;
+import com.mihaia.ecamin.Programari.ProgramariRecyclerViewAdapter;
+import com.mihaia.ecamin.Programari.ProgramarileMeleFragment;
+import com.mihaia.ecamin.R;
+import com.mihaia.ecamin.Utils;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+import static com.mihaia.ecamin.Utils.URLConectare;
+import static com.mihaia.ecamin.Utils.readStream;
+
+
+public class PlangerileMeleFragment extends Fragment {
+
+    RecyclerView recyclerView;
+    List<Plangere> data = new ArrayList<Plangere>();
+
+    PlangeriRecyclerViewAdapter mRecycleViewAdaper;
+    private OnFragmentInteractionListener mListener;
+
+
+    ////Pentru a vedea daca fragmentul este vizibil
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            try {
+                getData();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private void getData() throws IOException {
+        if(mRecycleViewAdaper != null) {
+            mRecycleViewAdaper.clear();
+            mRecycleViewAdaper.notifyDataSetChanged();
+        }
+        new SelectMethodAsync("Programari").execute(Utils.URLConectare);
+    }
+
+
+    public PlangerileMeleFragment() {
+        // Required empty public constructor
+    }
+
+    public static PlangerileMeleFragment newInstance(String param1, String param2) {
+        PlangerileMeleFragment fragment = new PlangerileMeleFragment();
+
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_plangerile_mele, container, false);
+
+        data.add(new Plangere(1, 1, 1, new Date(), null, false, false, "Chiuveta este fisurata, curge apa"));
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewListaPlangeri);
+
+        mRecycleViewAdaper = new PlangeriRecyclerViewAdapter(this.getContext(), data);
+
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(mRecycleViewAdaper);
+
+        return view;
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
+
+    public class SelectMethodAsync extends AsyncTask<String , Void ,String> {
+        String server_response;
+        String section;
+
+        public SelectMethodAsync(String section) {
+            this.section = section;
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+
+            try {
+                URL url;
+                HttpURLConnection urlConnection = null;
+
+                url = new URL(URLConectare + section + "/All");
+                urlConnection = (HttpURLConnection) url.openConnection();
+
+                urlConnection.setReadTimeout(10 * 1000);
+                urlConnection.setConnectTimeout(100 * 1000);
+                urlConnection.setRequestMethod("GET");
+                //urlConnection.setDoInput(true);
+                urlConnection.connect();
+
+                int responseCode = urlConnection.getResponseCode();
+                Log.d("Response from server:", String.valueOf(responseCode));
+
+                if(responseCode == HttpURLConnection.HTTP_OK){
+                    server_response = readStream(urlConnection.getInputStream());
+                    Log.d("Response Stream:", server_response);
+                }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            Gson gson =  new GsonBuilder().setDateFormat("dd MM yyyy HH").create();
+            Programare programare = new Programare();
+
+
+            Type collectionType = new TypeToken<ArrayList<Plangere>>(){}.getType();
+            Collection<Plangere> plangeri = null;
+            Programare p1 = null;
+            try {
+                plangeri = gson.fromJson(server_response, collectionType);
+            }catch(IllegalStateException | JsonSyntaxException exception){
+                exception.printStackTrace();
+            }
+
+            //data.add(p1);
+            if(plangeri != null) {
+                data.addAll((Collection<? extends Plangere>) plangeri);
+
+                mRecycleViewAdaper.notifyDataSetChanged();
+                Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_SHORT).show();
+                Log.e("Response", "" + server_response);
+            }
+
+        }
+    }
+}

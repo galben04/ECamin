@@ -64,8 +64,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F2EC2C"
-            android:textColor="@color/alb"
+            android:background= "#F2EC2C"
             android:text="@string/button_trimite"
             style="@style/textNormal"
             android:layout_marginTop="10dp" />

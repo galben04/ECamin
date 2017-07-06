@@ -57,7 +57,7 @@ public class GetAsyncTask extends AsyncTask<String , Void ,Collection<Integer>> 
             if(responseCode == HttpURLConnection.HTTP_OK){
                 server_response = readStream(urlConnection.getInputStream());
 
-                Gson gson =  new GsonBuilder().setDateFormat("dd MM yyyy HHXXX").create();
+                Gson gson =  new GsonBuilder().setDateFormat("dd MM yyyy HH").create();
                 try {
                     ore = gson.fromJson(server_response, collectionType);
                 }catch(IllegalStateException | JsonSyntaxException exception){

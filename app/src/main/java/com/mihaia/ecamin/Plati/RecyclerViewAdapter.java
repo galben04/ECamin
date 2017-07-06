@@ -1,7 +1,5 @@
-package com.mihaia.ecamin;
+package com.mihaia.ecamin.Plati;
 
-import android.icu.util.Calendar;
-import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
+import com.mihaia.ecamin.InformatiiPlata;
+import com.mihaia.ecamin.R;
 
 import java.util.GregorianCalendar;
 import java.util.List;

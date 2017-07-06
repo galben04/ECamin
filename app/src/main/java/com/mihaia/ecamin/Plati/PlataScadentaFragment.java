@@ -1,27 +1,25 @@
-package com.mihaia.ecamin;
+package com.mihaia.ecamin.Plati;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import com.mihaia.ecamin.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link IstoricPlatiFragment.OnFragmentInteractionListener} interface
+ * {@link PlataScadentaFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link IstoricPlatiFragment#newInstance} factory method to
+ * Use the {@link PlataScadentaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class IstoricPlatiFragment extends Fragment {
+public class PlataScadentaFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,13 +29,9 @@ public class IstoricPlatiFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RecyclerViewAdapter mRecycleViewAdaper;
-    private RecyclerView recyclerView;
-    ArrayList<InformatiiPlata> arrayList;
-
     private OnFragmentInteractionListener mListener;
 
-    public IstoricPlatiFragment() {
+    public PlataScadentaFragment() {
         // Required empty public constructor
     }
 
@@ -47,11 +41,11 @@ public class IstoricPlatiFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment IstoricPlatiFragment.
+     * @return A new instance of fragment PlataScadentaFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static IstoricPlatiFragment newInstance(String param1, String param2) {
-        IstoricPlatiFragment fragment = new IstoricPlatiFragment();
+    public static PlataScadentaFragment newInstance(String param1, String param2) {
+        PlataScadentaFragment fragment = new PlataScadentaFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,49 +62,10 @@ public class IstoricPlatiFragment extends Fragment {
         }
     }
 
-
-    private void initListTemp() {
-        GregorianCalendar dataScadenta = new GregorianCalendar();
-
-        dataScadenta.add(GregorianCalendar.DAY_OF_MONTH, 10);
-        dataScadenta.add(GregorianCalendar.MONTH, 1);
-
-        GregorianCalendar dataPlata = new GregorianCalendar();
-        dataPlata.add(GregorianCalendar.DAY_OF_MONTH, 5);
-        dataPlata.add(GregorianCalendar.MONTH, 1);
-
-        arrayList = new ArrayList<InformatiiPlata>();
-
-        arrayList.add(new InformatiiPlata("Ianuarie", (float)88.3, dataPlata, dataScadenta));
-
-        dataScadenta.add(GregorianCalendar.MONTH, 2);
-        dataPlata.add(GregorianCalendar.MONTH, 2);
-        arrayList.add(new InformatiiPlata("Februarie", (float)88.3, dataPlata, dataScadenta));
-
-        dataScadenta.add(GregorianCalendar.MONTH, 3);
-        dataPlata.add(GregorianCalendar.MONTH, 3);
-        arrayList.add(new InformatiiPlata("Martie", (float)88.3, dataPlata, dataScadenta));
-
-        dataScadenta.add(GregorianCalendar.MONTH, 4);
-        dataPlata.add(GregorianCalendar.MONTH, 4);
-        arrayList.add(new InformatiiPlata("Aprilie", (float)88.3, dataPlata, dataScadenta));
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_istoric_plati, container, false);
-
-        initListTemp();
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewIstoric);
-        mRecycleViewAdaper = new RecyclerViewAdapter(arrayList);
-
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mRecycleViewAdaper);
-        return view;
+        return inflater.inflate(R.layout.fragment_plata_scadenta, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -69,4 +69,8 @@
     <string name="select_masina">Selectati Masina de spalat</string>
     <string name="optional">Optional:</string>
     <string name="eroare_programare">Eroare! Nu au fost toate camputile selectate!</string>
+    <string name="id_plangere">Id Plangere</string>
+    <string name="data_solutionare">Data Solutionare:</string>
+    <string name="solutionata">Solutionata</string>
+    <string name="descriere_ex">Teapa de la calorifer este fisurata. Curge apa pe jos.</string>
 </resources>
