@@ -41,4 +41,8 @@ public class Plangere
         IsDel = isDel;
         Descriere = descriere;
     }
+
+    public Plangere() {
+
+    }
 }

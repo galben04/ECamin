@@ -95,7 +95,7 @@ public class ProgramareNouaFragment2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if(currentHourSelection == null) {
-                    Toast.makeText(getActivity().getApplicationContext(), R.string.eroare_programare, Toast.LENGTH_SHORT);
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.eroare_programare, Toast.LENGTH_SHORT).show();
                 } else {
                     Programare itemToInsert = getProgramareFromForm();
                     new InsertAsyncTask<Programare>("Programari"){

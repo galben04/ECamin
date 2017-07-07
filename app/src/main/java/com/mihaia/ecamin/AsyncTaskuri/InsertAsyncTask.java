@@ -36,7 +36,7 @@ public class InsertAsyncTask<T> extends AsyncTask<T , Void ,Integer> {
         URL url;
         HttpURLConnection urlConnection = null;
 
-        Gson gson = new GsonBuilder().setDateFormat("dd MM yyyy HH").create();
+        Gson gson = new GsonBuilder().setDateFormat("dd MM yyyy HH").serializeNulls().create();
         String jsonString = gson.toJson(params[0]);
 
         try {

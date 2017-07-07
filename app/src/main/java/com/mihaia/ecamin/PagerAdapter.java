@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.mihaia.ecamin.Plangeri.PlangereNouaFragment;
 import com.mihaia.ecamin.Plangeri.PlangerileMeleFragment;
 import com.mihaia.ecamin.Plati.IstoricPlatiFragment;
 import com.mihaia.ecamin.Plati.PlataScadentaFragment;
@@ -82,7 +83,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
             case Plangeri:
                 tab1 = new PlangerileMeleFragment();
-                tab2 = new IstoricPlatiFragment();
+                tab2 = new PlangereNouaFragment();
                 tab3 = null;
                 break;
 

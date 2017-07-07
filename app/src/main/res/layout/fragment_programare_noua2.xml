@@ -37,7 +37,7 @@
             style="@style/Spinner"
             android:spinnerMode="dropdown"
             android:id="@+id/spinner_ProgNoua_Data"
-            android:background="@color/portocaliuING">
+            android:textAlignment="center">
         </Spinner>
 
 
@@ -74,7 +74,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/listview_ProgNoua_Ora"
-                    android:background="@drawable/background_list_item">
+                    android:background="@drawable/background_list_item"
+                    android:textAlignment="center">
                 </ListView>
 
             </LinearLayout>
@@ -104,7 +105,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/background_gri"
-                    android:id="@+id/listview_ProgNoua_Masini">
+                    android:id="@+id/listview_ProgNoua_Masini"
+                    android:textAlignment="center">
 
                 </ListView>
             </LinearLayout>
@@ -120,7 +122,8 @@
             android:text="@string/button_trimite"
             style="@style/textNormal"
             android:layout_marginTop="10dp"
-            android:id="@+id/btn_ProgNoua_Trimite"/>
+            android:id="@+id/btn_ProgNoua_Trimite"
+                android:textColor="#000000"/>
 
         </LinearLayout>
     </LinearLayout>

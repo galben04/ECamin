@@ -27,20 +27,27 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Anghel Mihai"
-            android:inputType="none"/>
+            android:inputType="none"
+            android:focusable="false"
+            android:id="@+id/tv_Principala_user"
+            style="@style/textTitlu"
+            android:textColor="@color/albastruLogo"/>
 
-        <EditText
+        <TextView
             android:layout_height="wrap_content"
             android:text="Camera 414"
             android:layout_width="wrap_content"
             app:layout_column="1"
             app:layout_row="1"
-            android:inputType="none"/>
+            android:inputType="none"
+            android:focusable="false"/>
 
-        <Button
+        <ImageButton
+            android:layout_margin="15dp"
             app:layout_column="3"
             app:layout_row="0"
-            android:visibility="gone"/>
+            android:id="@+id/btn_Logout"
+            android:background="@drawable/logout_32"/>
 
         <Button
             android:id="@+id/buttonArataMeniuSus"

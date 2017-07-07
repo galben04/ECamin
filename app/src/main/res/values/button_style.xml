@@ -37,6 +37,7 @@
     </style>
 
     <style name="Spinner" parent="Widget.AppCompat.Spinner">
-        <item name="backgroundTint">@color/verdeLogo</item>
+        <item name="backgroundTint">@color/portocaliuING</item>
+        <item name="android:padding">10dp</item>
     </style>
 </resources>

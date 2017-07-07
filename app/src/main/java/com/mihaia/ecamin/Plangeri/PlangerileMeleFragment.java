@@ -67,7 +67,7 @@ public class PlangerileMeleFragment extends Fragment {
             mRecycleViewAdaper.clear();
             mRecycleViewAdaper.notifyDataSetChanged();
         }
-        new SelectMethodAsync("Programari").execute(Utils.URLConectare);
+        new SelectMethodAsync("Plangeri").execute();
     }
 
 
@@ -98,7 +98,7 @@ public class PlangerileMeleFragment extends Fragment {
 
         mRecycleViewAdaper = new PlangeriRecyclerViewAdapter(this.getContext(), data);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mRecycleViewAdaper);
 
@@ -138,6 +138,14 @@ public class PlangerileMeleFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(mRecycleViewAdaper != null)
+            mRecycleViewAdaper.notifyDataSetChanged();
+
+    }
 
     public class SelectMethodAsync extends AsyncTask<String , Void ,String> {
         String server_response;
@@ -187,12 +195,9 @@ public class PlangerileMeleFragment extends Fragment {
             super.onPostExecute(s);
 
             Gson gson =  new GsonBuilder().setDateFormat("dd MM yyyy HH").create();
-            Programare programare = new Programare();
-
 
             Type collectionType = new TypeToken<ArrayList<Plangere>>(){}.getType();
             Collection<Plangere> plangeri = null;
-            Programare p1 = null;
             try {
                 plangeri = gson.fromJson(server_response, collectionType);
             }catch(IllegalStateException | JsonSyntaxException exception){
@@ -203,7 +208,9 @@ public class PlangerileMeleFragment extends Fragment {
             if(plangeri != null) {
                 data.addAll((Collection<? extends Plangere>) plangeri);
 
-                mRecycleViewAdaper.notifyDataSetChanged();
+                mRecycleViewAdaper = new PlangeriRecyclerViewAdapter(getContext(), data);
+                recyclerView.invalidate();
+                recyclerView.setAdapter(mRecycleViewAdaper);
                 Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_SHORT).show();
                 Log.e("Response", "" + server_response);
             }

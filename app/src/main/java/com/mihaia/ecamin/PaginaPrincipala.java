@@ -1,5 +1,8 @@
 package com.mihaia.ecamin;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -7,31 +10,80 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ButtonBarLayout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.mihaia.ecamin.DataContracts.User;
 
 public class PaginaPrincipala extends AppCompatActivity {
 
     BottomNavigationView buttomBar;
+
+    TextView tvUser;
 
     LinearLayout layoutMeniuSus;
     Button butArataMeniu;
     TabLayout tabLayout;
     ViewPager viewPager;
     PagerAdapter adapter;
+    ImageButton btnLogout;
 
+    private User UserLogat;
+    Context context;
+
+    public User getUserLogat() {
+        return UserLogat;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_principala);
+
+        context = this;
+
+        btnLogout =(ImageButton) findViewById(R.id.btn_Logout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                builder.setTitle("Logout");
+                builder.setMessage("Sunteti sigur?");
+                builder.setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+
+                builder.setNegativeButton("Nu",  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+            }
+        });
+        tvUser = (TextView) findViewById(R.id.tv_Principala_user);
+        getCurrentUser();
+
 
         /*********Tab-uri sus si adaptor */////
         ////TabLayout navigationUP
@@ -145,4 +197,36 @@ public class PaginaPrincipala extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void getCurrentUser() {
+        Intent intent = getIntent();
+        String jsonUser = intent.getStringExtra(Utils.CurrentUser);
+
+        Gson gson = new Gson();
+        User user = gson.fromJson(jsonUser, User.class);
+
+        if(user == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setTitle(R.string.tilu_relogat);
+            builder.setMessage(R.string.relogare);
+            builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+
+
+            finish();
+            dialog.show();
+        }else {
+            this.UserLogat = user;
+            tvUser.setText(UserLogat.Cont);
+
+        }
+    }
+
 }

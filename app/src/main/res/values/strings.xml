@@ -31,8 +31,8 @@
     <string name="opt1_tab2">Istoric</string>
     <string name="opt1_tab3">Internet</string>
 
-    <string name="opt2_tab1">1</string>
-    <string name="opt2_tab2">2</string>
+    <string name="opt2_tab1">Plangerile mele</string>
+    <string name="opt2_tab2">Plangere Noua</string>
     <string name="opt2_tab3">3</string>
 
     <string name="opt3_tab1">Programarile mele</string>
@@ -73,4 +73,11 @@
     <string name="data_solutionare">Data Solutionare:</string>
     <string name="solutionata">Solutionata</string>
     <string name="descriere_ex">Teapa de la calorifer este fisurata. Curge apa pe jos.</string>
+    <string name="eroare_planegere_descriere_lipsa">Completati descrierea!</string>
+    <string name="plangere_anulata">Plangerea a fost anulata cu succes!</string>
+    <string name="eroare_anulare_plangere">Eroare la stergerea plangerii! Incercati din nou</string>
+    <string name="anulare_stergere_plangere">Stergerea plangerii a fost anulata!</string>
+    <string name="user_parola_gresit">Combinatia de User si Parola nu se potrivesc</string>
+    <string name="relogare">Va rugam sa logati din nou!</string>
+    <string name="tilu_relogat">Relogare</string>
 </resources>
