@@ -20,6 +20,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mihaia.ecamin.DataContracts.Plangere;
 import com.mihaia.ecamin.DataContracts.Programare;
+import com.mihaia.ecamin.PaginaPrincipala;
 import com.mihaia.ecamin.Programari.ProgramariRecyclerViewAdapter;
 import com.mihaia.ecamin.Programari.ProgramarileMeleFragment;
 import com.mihaia.ecamin.R;
@@ -44,6 +45,8 @@ public class PlangerileMeleFragment extends Fragment {
     RecyclerView recyclerView;
     List<Plangere> data = new ArrayList<Plangere>();
 
+    private Context context;
+
     PlangeriRecyclerViewAdapter mRecycleViewAdaper;
     private OnFragmentInteractionListener mListener;
 
@@ -53,21 +56,17 @@ public class PlangerileMeleFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser) {
-            try {
-                getData();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
         }
     }
 
 
     private void getData() throws IOException {
-        if(mRecycleViewAdaper != null) {
-            mRecycleViewAdaper.clear();
-            mRecycleViewAdaper.notifyDataSetChanged();
-        }
-        new SelectMethodAsync("Plangeri").execute();
+//        if(mRecycleViewAdaper != null) {
+//            mRecycleViewAdaper.clear();
+//            mRecycleViewAdaper.notifyDataSetChanged();
+//        }
+        new SelectMethodAsync("Plangeri").execute(String.valueOf(PaginaPrincipala.getUserLogat().Id_User));
     }
 
 
@@ -98,9 +97,10 @@ public class PlangerileMeleFragment extends Fragment {
 
         mRecycleViewAdaper = new PlangeriRecyclerViewAdapter(this.getContext(), data);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mRecycleViewAdaper);
+        context = this.getContext();
+//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setAdapter(mRecycleViewAdaper);
 
         return view;
     }
@@ -123,19 +123,26 @@ public class PlangerileMeleFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void setMenuVisibility(boolean menuVisible) {
+        if(!menuVisible) {
+
+        }else {
+            try {
+                getData();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        super.setMenuVisibility(menuVisible);
     }
 
     @Override
@@ -163,7 +170,7 @@ public class PlangerileMeleFragment extends Fragment {
                 URL url;
                 HttpURLConnection urlConnection = null;
 
-                url = new URL(URLConectare + section + "/All");
+                url = new URL(URLConectare + section + "/All(" + strings[0] + ")");
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 urlConnection.setReadTimeout(10 * 1000);
@@ -206,11 +213,12 @@ public class PlangerileMeleFragment extends Fragment {
 
             //data.add(p1);
             if(plangeri != null) {
-                data.addAll((Collection<? extends Plangere>) plangeri);
-
-                mRecycleViewAdaper = new PlangeriRecyclerViewAdapter(getContext(), data);
-                recyclerView.invalidate();
+                mRecycleViewAdaper.clear();
+                mRecycleViewAdaper.addAll(plangeri);
+                LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+                recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setAdapter(mRecycleViewAdaper);
+
                 Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_SHORT).show();
                 Log.e("Response", "" + server_response);
             }

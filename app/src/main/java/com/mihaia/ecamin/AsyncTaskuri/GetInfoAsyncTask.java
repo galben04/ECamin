@@ -1,5 +1,6 @@
 package com.mihaia.ecamin.AsyncTaskuri;
 
+import android.icu.text.IDNA;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -7,8 +8,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.mihaia.ecamin.DataContracts.InfoUser;
 import com.mihaia.ecamin.DataContracts.Masina_Spalat;
-import com.mihaia.ecamin.DataContracts.Stare_Plangere;
 import com.mihaia.ecamin.Utils;
 
 import java.io.IOException;
@@ -25,24 +26,26 @@ import static com.mihaia.ecamin.Utils.readStream;
  * Created by mihaia on 7/10/2017.
  */
 
-public class GetMasiniAsyncTask extends AsyncTask<String , Void , Collection<Masina_Spalat>> {
+public class GetInfoAsyncTask extends AsyncTask<String , Void ,InfoUser> {
     String server_response;
     String section;
 
-    public GetMasiniAsyncTask(String section) {
+    public GetInfoAsyncTask(String section) {
         this.section = section;
     }
 
-    protected Collection<Masina_Spalat> doInBackground(String... strings) {
+    @Override
+    protected InfoUser doInBackground(String... strings) {
+        InfoUser info = null;
 
-        Type collectionType = new TypeToken<ArrayList<Masina_Spalat>>() {}.getType();
-        Collection<Masina_Spalat> masini = null;
+        if (strings.length < 1)
+            return null;
 
         try {
             URL url;
             HttpURLConnection urlConnection = null;
 
-            url = new URL(Utils.URLConectare + section + "/All");
+            url = new URL(Utils.URLConectare + section + "(" + strings[0] + ")");
             urlConnection = (HttpURLConnection) url.openConnection();
 
             urlConnection.setReadTimeout(10 * 1000);
@@ -58,12 +61,11 @@ public class GetMasiniAsyncTask extends AsyncTask<String , Void , Collection<Mas
 
                 Gson gson = new GsonBuilder().setDateFormat("dd MM yyyy HH").create();
                 try {
-                    masini = gson.fromJson(server_response, collectionType);
+                    info = gson.fromJson(server_response, InfoUser.class);
                 } catch (IllegalStateException | JsonSyntaxException exception) {
                     exception.printStackTrace();
                 }
 
-                urlConnection.disconnect();
                 Log.d("Response Stream:", server_response);
             }
 
@@ -73,6 +75,8 @@ public class GetMasiniAsyncTask extends AsyncTask<String , Void , Collection<Mas
             e.printStackTrace();
         }
 
-        return masini;
+        return info;
     }
+
+
 }

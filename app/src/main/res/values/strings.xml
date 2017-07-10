@@ -82,4 +82,5 @@
     <string name="tilu_relogat">Relogare</string>
     <string name="eorare_conexiune_server">Eroare la conexiunea cu serverul</string>
     <string name="statusPlata">Status:</string>
+    <string name="masina">Masina:</string>
 </resources>

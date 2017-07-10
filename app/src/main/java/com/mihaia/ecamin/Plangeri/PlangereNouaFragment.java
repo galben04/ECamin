@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.mihaia.ecamin.AsyncTaskuri.InsertAsyncTask;
 import com.mihaia.ecamin.DataContracts.Plangere;
 import com.mihaia.ecamin.DataContracts.Programare;
+import com.mihaia.ecamin.PaginaPrincipala;
 import com.mihaia.ecamin.R;
 
 import org.w3c.dom.Text;
@@ -120,7 +121,7 @@ public class PlangereNouaFragment extends Fragment {
 
     private Plangere getPlanegereFromForm() {
         Plangere plangere = new Plangere();
-        plangere.Id_User = 1;
+        plangere.Id_User = PaginaPrincipala.getUserLogat().Id_User;
 
         plangere.Descriere = editTextDescriere.getText().toString();
         plangere.Data = new Date();

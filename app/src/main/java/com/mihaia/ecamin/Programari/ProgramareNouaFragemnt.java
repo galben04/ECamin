@@ -17,10 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mihaia.ecamin.AsyncTaskuri.GetAsyncTask;
-import com.mihaia.ecamin.AsyncTaskuri.GetMasiniAsyncTask;
+import com.mihaia.ecamin.AsyncTaskuri.GetMasiniLibereAsyncTask;
 import com.mihaia.ecamin.AsyncTaskuri.InsertAsyncTask;
 import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Programare;
+import com.mihaia.ecamin.PaginaPrincipala;
 import com.mihaia.ecamin.R;
 
 import java.text.SimpleDateFormat;
@@ -83,8 +84,6 @@ public class ProgramareNouaFragemnt extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_programare_noua, container, false);
 
-//        textViewIdMasina = (TextView) view.findViewById(R.id.tv_ProgramareNoua_IdMasina);
-//        textViewIdUser = (TextView) view.findViewById(R.id.tv_ProgramareNoua_IdUser);
         tvOptional = (TextView) view.findViewById(R.id.tv_optional);
 
         spinnerData = (Spinner) view.findViewById(R.id.spinner_ProgramareNoua_Data);
@@ -97,9 +96,6 @@ public class ProgramareNouaFragemnt extends Fragment {
         spinnerData.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(parent.getContext(),
-//                        "OnItemSelectedListener : " + parent.getItemAtPosition(position).toString(),
-//                        Toast.LENGTH_SHORT).show();
                 spinnerOra.setEnabled(false);
                 spinnerMasina.setVisibility(View.GONE);
                 tvOptional.setVisibility(View.GONE);
@@ -137,7 +133,7 @@ public class ProgramareNouaFragemnt extends Fragment {
                         Toast.makeText(parent.getContext(),
                                  getResources().getText(R.string.eroare_data_programare), Toast.LENGTH_SHORT).show();
                     } else {
-                        new GetMasiniAsyncTask("Programari/MasiniLibere") {
+                        new GetMasiniLibereAsyncTask("Programari/MasiniLibere") {
                             @Override
                             protected void onPostExecute(Collection<Masina_Spalat> masini) {
                                 super.onPostExecute(masini);
@@ -166,7 +162,7 @@ public class ProgramareNouaFragemnt extends Fragment {
 
                 Programare newItem = getProgramareFromForm();
 
-                new InsertAsyncTask<Programare>("Progrmari").execute(new Programare());
+                new InsertAsyncTask<Programare>("Progrmari").execute(newItem);
             }
         });
 
@@ -238,7 +234,7 @@ public class ProgramareNouaFragemnt extends Fragment {
     private Programare getProgramareFromForm() {
         Programare p = new Programare();
 
-        p.Id_User = 1;
+        p.Id_User = PaginaPrincipala.getUserLogat().Id_User;
         p.Id_Masina  = Integer.valueOf(spinnerMasina.getSelectedItem().toString().split("\\.")[0]);
         p.IsDel = false;
 
@@ -256,12 +252,6 @@ public class ProgramareNouaFragemnt extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
     }
 
     @Override

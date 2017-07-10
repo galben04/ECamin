@@ -18,11 +18,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.mihaia.ecamin.AsyncTaskuri.GetAsyncTask;
-import com.mihaia.ecamin.AsyncTaskuri.GetMasiniAsyncTask;
+import com.mihaia.ecamin.AsyncTaskuri.GetMasiniLibereAsyncTask;
 import com.mihaia.ecamin.AsyncTaskuri.InsertAsyncTask;
 import com.mihaia.ecamin.CustomArrayAdapter;
 import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Programare;
+import com.mihaia.ecamin.PaginaPrincipala;
 import com.mihaia.ecamin.R;
 
 import java.text.ParseException;
@@ -167,7 +168,7 @@ public class ProgramareNouaFragment2 extends Fragment {
                     Toast.makeText(parent.getContext(),
                             getResources().getText(R.string.eroare_data_programare), Toast.LENGTH_SHORT).show();
                 } else {
-                    new GetMasiniAsyncTask("Programari/MasiniLibere") {
+                    new GetMasiniLibereAsyncTask("Programari/MasiniLibere") {
                         @Override
                         protected void onPostExecute(Collection<Masina_Spalat> masini) {
                             super.onPostExecute(masini);
@@ -280,7 +281,7 @@ public class ProgramareNouaFragment2 extends Fragment {
     private Programare getProgramareFromForm() {
         Programare p = new Programare();
 
-        p.Id_User = 1;
+        p.Id_User = PaginaPrincipala.getUserLogat().Id_User;
         int ora = Integer.valueOf(currentHourSelection);
         p.Id_Masina  = Integer.valueOf(currentMasinaSelection);
         p.IsDel = false;

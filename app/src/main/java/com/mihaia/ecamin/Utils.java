@@ -1,11 +1,15 @@
 package com.mihaia.ecamin;
 
+import com.mihaia.ecamin.DataContracts.InfoUser;
+import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Stare_Plangere;
+import com.mihaia.ecamin.DataContracts.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +21,22 @@ public class Utils {
     public static String CurrentUser;
     public static String valuta = "RON";
 
+    public static InfoUser infoUserLogat;
+
+    public enum Sectiuni{
+        Plati,
+        Plangeri,
+        Programari,
+        Setari
+    }
+
+    public static String URLConectare = "http://192.168.1.78:51133/";
+    //"http://169.254.237.217:51133/" ;//"http://192.168.0.129:51133/";
+    //"http://192.168.1.78:51133/" Munca;
+
+
+    public static ArrayList<Stare_Plangere> StariPlageri = new ArrayList<Stare_Plangere>();
+
     public static String getNumeStarebyId(int id_stare) {
         for (Stare_Plangere stare: StariPlageri) {
             if(stare.Id_Stare == id_stare)
@@ -26,19 +46,16 @@ public class Utils {
         return null;
     }
 
-    public enum Sectiuni{
-        Plati,
-        Plangeri,
-        Programari,
-        Setari
+    public static ArrayList<Masina_Spalat> MasiniSpalat = new ArrayList<Masina_Spalat>();
+
+    public static Masina_Spalat getMasinabyId(int id_masina) {
+        for(Masina_Spalat masina : MasiniSpalat) {
+            if(masina.Id_Masina == id_masina)
+                return masina;
+        }
+
+        return null;
     }
-
-    public static String URLConectare = "http://192.168.192.1:51133";
-            //"http://169.254.237.217:51133/" ;//"http://192.168.0.129:51133/";
-    //"http://192.168.1.78:51133/" Munca;
-
-
-    public static ArrayList<Stare_Plangere> StariPlageri = new ArrayList<Stare_Plangere>();
 
     public static String readStream(InputStream in) {
         BufferedReader reader = null;

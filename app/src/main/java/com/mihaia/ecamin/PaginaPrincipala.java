@@ -19,11 +19,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.mihaia.ecamin.DataContracts.InfoUser;
 import com.mihaia.ecamin.DataContracts.User;
 
 public class PaginaPrincipala extends AppCompatActivity {
@@ -39,11 +41,16 @@ public class PaginaPrincipala extends AppCompatActivity {
     PagerAdapter adapter;
     ImageButton btnLogout;
 
-    private User UserLogat;
+    private static User UserLogat;
     Context context;
+    private static InfoUser infoUserLogat;
 
-    public User getUserLogat() {
+    public static User getUserLogat() {
         return UserLogat;
+    }
+
+    public static InfoUser getInfoUserLogat() {
+        return infoUserLogat;
     }
 
     @Override
@@ -81,6 +88,7 @@ public class PaginaPrincipala extends AppCompatActivity {
 
             }
         });
+
         tvUser = (TextView) findViewById(R.id.tv_Principala_user);
         getCurrentUser();
 
@@ -107,15 +115,14 @@ public class PaginaPrincipala extends AppCompatActivity {
                 {
                     case R.id.action_1:
                         adapter.setSectiuneCurenta(Utils.Sectiuni.Plati);
-                        if(adapter.getCount() == 2){
+                        if(adapter.getCount() == 3){
                             tabLayout.addTab(tabLayout.newTab());
-                            adapter.mNumOfTabs = 3;
+                            adapter.mNumOfTabs = 2;
                         }
 
                         adapter.notifyDataSetChanged();
                         tabLayout.getTabAt(0).setText(R.string.opt1_tab1);
                         tabLayout.getTabAt(1).setText(R.string.opt1_tab2);
-                        tabLayout.getTabAt(2).setText(R.string.opt1_tab3);
                         break;
 
                     case R.id.action_2:
@@ -178,6 +185,30 @@ public class PaginaPrincipala extends AppCompatActivity {
     }
 
 
+    public void initViewPager()
+    {
+        viewPager.setVisibility(View.VISIBLE);
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId())
@@ -225,7 +256,6 @@ public class PaginaPrincipala extends AppCompatActivity {
         }else {
             this.UserLogat = user;
             tvUser.setText(UserLogat.Cont);
-
         }
     }
 

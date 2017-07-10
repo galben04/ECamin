@@ -15,11 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mihaia.ecamin.AsyncTaskuri.DeleteAsyncTask;
+import com.mihaia.ecamin.AsyncTaskuri.GetStariPlangeriAsync;
 import com.mihaia.ecamin.DataContracts.Plangere;
+import com.mihaia.ecamin.DataContracts.Stare_Plangere;
 import com.mihaia.ecamin.R;
 import com.mihaia.ecamin.Utils;
 
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -108,15 +111,15 @@ public class PlangeriRecyclerViewAdapter extends RecyclerView.Adapter<PlangeriRe
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = (View) inflater.inflate(R.layout.element_lista_plangeri, parent, false);
 
-//        new GetStariPlangeriAsync("StariPlangeri") {
-//            @Override
-//            protected void onPostExecute(Collection<Stare_Plangere> stari) {
-//                super.onPostExecute(stari);
-//                if(stari != null)
-//                    Utils.StariPlageri.addAll(stari);
-//                    ReftoThis.notifyDataSetChanged();
-//            }
-//        }.execute();
+        new GetStariPlangeriAsync("StariPlangeri") {
+            @Override
+            protected void onPostExecute(Collection<Stare_Plangere> stari) {
+                super.onPostExecute(stari);
+                if(stari != null)
+                    Utils.StariPlageri.addAll(stari);
+                    ReftoThis.notifyDataSetChanged();
+            }
+        }.execute();
 
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
@@ -169,6 +172,7 @@ public class PlangeriRecyclerViewAdapter extends RecyclerView.Adapter<PlangeriRe
                                 if(integer == 1)
                                 {
                                     Toast.makeText(context, R.string.plangere_anulata, Toast.LENGTH_SHORT).show();
+                                    ReftoThis.mDataset.remove(poz);
                                     ReftoThis.notifyDataSetChanged();
                                 }
 
@@ -200,12 +204,17 @@ public class PlangeriRecyclerViewAdapter extends RecyclerView.Adapter<PlangeriRe
 //    private void getNumeStare(Stare_Plangere stare) {
 //        this.NumeStare =  stare.Nume;
 //    }
+    public void addAll(Collection<Plangere> plangeri)
+    {
+        mDataset.addAll(plangeri);
+        this.notifyDataSetChanged();
+    }
+
 
     public void clear()
     {
-        int size = mDataset.size();
         mDataset.clear();
-        this.notifyItemRangeRemoved(0, size);
+        this.notifyDataSetChanged();
     }
 
     @Override

@@ -14,10 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mihaia.ecamin.AsyncTaskuri.DeleteAsyncTask;
+import com.mihaia.ecamin.AsyncTaskuri.GetMasiniLibereAsyncTask;
+import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Programare;
 import com.mihaia.ecamin.R;
+import com.mihaia.ecamin.Utils;
 
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -27,8 +31,10 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
     private List<Programare> mDataset;
     public ProgramariRecyclerViewAdapter ReftoThis;
 
+
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView IdProgramare, data, IdUser, IdMasina;
+        public TextView IdProgramare, data, EtajMasina, IdMasina;
         public TextView IsDel;
         public ImageButton btnDetalii, btnDelete;
         public TableLayout layoutDetalii;
@@ -46,8 +52,8 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
 
             IdProgramare = (TextView) view.findViewById(R.id.tvProgramari_IdProgramare);
             data = (TextView) view.findViewById(R.id.tvProgramari_Data);
-            IdUser = (TextView) view.findViewById(R.id.tvProgramari_Etaj_TempUser);
-            IdMasina = (TextView) view.findViewById(R.id.tvProgramari_IdMasina);
+            EtajMasina = (TextView) view.findViewById(R.id.tvProgramari_Etaj);
+            IdMasina = (TextView) view.findViewById(R.id.tvProgramari_NumeMasina);
             IsDel = (TextView) view.findViewById(R.id.isDel);
 
             layoutDetalii.setVisibility(View.GONE);
@@ -96,18 +102,34 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
         View v = (View) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.element_lista_programari, parent, false);
 
+            new GetMasiniLibereAsyncTask("MasiniSpalat") {
+                @Override
+                protected void onPostExecute(Collection<Masina_Spalat> masini) {
+                    super.onPostExecute(masini);
+                    if(masini != null)
+                        Utils.MasiniSpalat.addAll(masini);
+                    ReftoThis.notifyDataSetChanged();
+                }
+            }.execute();
+
 
         ProgramariRecyclerViewAdapter.ViewHolder vh = new ProgramariRecyclerViewAdapter.ViewHolder(v);
         return vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ProgramariRecyclerViewAdapter.ViewHolder holder, final int poz) {
 
         holder.IdProgramare.setText(String.valueOf(mDataset.get(poz).Id_Programare));
-        holder.IdMasina.setText(String.valueOf(mDataset.get(poz).Id_Masina));
-        holder.IdUser.setText(String.valueOf(mDataset.get(poz).Id_User));
+
+        if(Utils.getMasinabyId(mDataset.get(poz).Id_Masina) != null) {
+            holder.IdMasina.setText(Utils.getMasinabyId(mDataset.get(poz).Id_Masina).Nume);
+            holder.EtajMasina.setText(Utils.getMasinabyId(mDataset.get(poz).Id_Masina).Etaj);
+        } else{
+            holder.IdMasina.setText(String.valueOf(mDataset.get(poz).Id_Masina));
+            holder.EtajMasina.setText("-");
+        }
+
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm");
         if(mDataset.get(poz).Data_Ora != null)
@@ -138,6 +160,7 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
                                 if(integer == 1)
                                 {
                                     Toast.makeText(context, R.string.programare_anulata, Toast.LENGTH_SHORT).show();
+                                    ReftoThis.mDataset.remove(poz);
                                     ReftoThis.notifyDataSetChanged();
                                 }
 
@@ -165,6 +188,12 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
         });
 
     }
+
+    public void addAll(Collection<Programare> programari) {
+        mDataset.addAll(programari);
+        this.notifyDataSetChanged();
+    }
+
 
     public void clear()
     {

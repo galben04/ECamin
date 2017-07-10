@@ -18,6 +18,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mihaia.ecamin.DataContracts.Programare;
+import com.mihaia.ecamin.PaginaPrincipala;
 import com.mihaia.ecamin.R;
 import com.mihaia.ecamin.Utils;
 
@@ -96,17 +97,12 @@ public class ProgramarileMeleFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewListaProgramari);
 
         data.add(new Programare(1, new Date(), 1,1,true));
-//        try {
-//            getData();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+
         mRecycleViewAdaper = new ProgramariRecyclerViewAdapter(this.getContext(), data);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mRecycleViewAdaper);
-
+//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setAdapter(mRecycleViewAdaper);
         return view;
     }
 
@@ -178,9 +174,14 @@ public class ProgramarileMeleFragment extends Fragment {
 
             //data.add(p1);
             if(programari != null) {
-                data.addAll((Collection<? extends Programare>) programari);
+                mRecycleViewAdaper.clear();
+                mRecycleViewAdaper.addAll(programari);
 
-                mRecycleViewAdaper.notifyDataSetChanged();
+                LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setAdapter(mRecycleViewAdaper);
+
                 Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_SHORT).show();
                 Log.e("Response", "" + server_response);
             }
@@ -194,7 +195,7 @@ public class ProgramarileMeleFragment extends Fragment {
             mRecycleViewAdaper.clear();
             mRecycleViewAdaper.notifyDataSetChanged();
         }
-        new SelectMethodAsync().execute(Utils.URLConectare + "Programari/All");
+        new SelectMethodAsync().execute(Utils.URLConectare + "Programari/All(" + PaginaPrincipala.getUserLogat().Id_User + ")");
     }
 
 
