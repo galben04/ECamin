@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Utils {
 
     public static String CurrentUser;
+    public static String valuta = "RON";
 
     public static String getNumeStarebyId(int id_stare) {
         for (Stare_Plangere stare: StariPlageri) {
@@ -32,7 +33,8 @@ public class Utils {
         Setari
     }
 
-    public static String URLConectare = "http://192.168.1.78:51133/" ;//"http://192.168.0.129:51133/";
+    public static String URLConectare = "http://192.168.192.1:51133";
+            //"http://169.254.237.217:51133/" ;//"http://192.168.0.129:51133/";
     //"http://192.168.1.78:51133/" Munca;
 
 

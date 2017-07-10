@@ -6,11 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.mihaia.ecamin.DataContracts.EvidentaPlata;
 import com.mihaia.ecamin.InformatiiPlata;
 import com.mihaia.ecamin.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -24,7 +29,13 @@ import java.util.List;
 /**********************************************NU UITA SA STERGI COMENTARIILE(luat de pe android developer)******************************************************************/
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private List<InformatiiPlata> mDataset;
+    private List<EvidentaPlata> mDataset;
+
+    public void addAll(Collection<EvidentaPlata> evidentaPlati) {
+        mDataset.clear();
+        mDataset.addAll(evidentaPlati);
+        this.notifyItemRangeChanged(0, getItemCount() - 1);
+    }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -34,12 +45,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public TextView lunaTitlu, sumaTitlu;
         public ImageButton btnDetalii;
         public TableLayout layoutDetalii;
+        TableRow rowVizibil;
 
         TextView ziPlata, lunaPlata, ziScadenta, lunaScadenta;
 
         public ViewHolder(View view) {
             super(view);
 
+            rowVizibil = (TableRow) view.findViewById(R.id.tableRow_Vizibil_Plati);
             lunaTitlu = (TextView) view.findViewById(R.id.textViewIstoricLuna);
             sumaTitlu = (TextView) view.findViewById(R.id.textViewIstoricSuma);
             btnDetalii = (ImageButton) view.findViewById(R.id.imgBtnIstoricDetalii);
@@ -53,23 +66,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             ziScadenta = (TextView) view.findViewById(R.id.textViewIstoricZiScadenta);
             lunaScadenta = (TextView) view.findViewById(R.id.textViewIstoricLunaScadenta);
 
-            btnDetalii.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(layoutDetalii.getVisibility() == View.VISIBLE){
-                        layoutDetalii.setVisibility(View.GONE);
-                        btnDetalii.setBackgroundResource(R.drawable.more_24);
-                    } else {
-                        layoutDetalii.setVisibility(View.VISIBLE);
-                        btnDetalii.setBackgroundResource(R.drawable.less_24);
-                    }
-                }
-            });
+            btnDetalii.setOnClickListener(clickExtinde);
+            rowVizibil.setOnClickListener(clickExtinde);
         }
+
+        View.OnClickListener clickExtinde = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(layoutDetalii.getVisibility() == View.VISIBLE){
+                    layoutDetalii.setVisibility(View.GONE);
+                    btnDetalii.setBackgroundResource(R.drawable.more_24);
+                } else {
+                    layoutDetalii.setVisibility(View.VISIBLE);
+                    btnDetalii.setBackgroundResource(R.drawable.less_24);
+                }
+            }
+        };
     }
 
+
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RecyclerViewAdapter(List<InformatiiPlata> dataset) {
+    public RecyclerViewAdapter(List<EvidentaPlata> dataset) {
         mDataset = dataset;
     }
 
@@ -90,14 +107,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int poz) {
 
-        holder.lunaTitlu.setText(mDataset.get(poz).getLuna());
-        holder.sumaTitlu.setText(mDataset.get(poz).getSuma().toString());
-        
-            holder.ziPlata.setText("" + ( mDataset.get(poz).getDataPlata().get(GregorianCalendar.DAY_OF_MONTH)));
-            holder.lunaPlata.setText("" + mDataset.get(poz).getDataPlata().get(GregorianCalendar.MONTH));
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        holder.lunaTitlu.setText(df.format(mDataset.get(poz).DataPlata));
+        holder.sumaTitlu.setText(mDataset.get(poz).SumaPlata.toString());
 
-            holder.ziScadenta.setText("" + mDataset.get(poz).getDataPlata().get(GregorianCalendar.DAY_OF_MONTH));
-            holder.lunaScadenta.setText("" + +mDataset.get(poz).getDataPlata().get(GregorianCalendar.MONTH));
+        df = new SimpleDateFormat("dd");
+        SimpleDateFormat dfLuna = new SimpleDateFormat("MM");
+
+            holder.ziPlata.setText("" + df.format(mDataset.get(poz).DataPlata) + ".");
+            holder.lunaPlata.setText("" + dfLuna.format(mDataset.get(poz).DataPlata));
+
+
+            holder.ziScadenta.setText(" 01.");
+            holder.lunaScadenta.setText("" + dfLuna.format(new Date()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

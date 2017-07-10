@@ -46,8 +46,8 @@
             android:layout_margin="15dp"
             app:layout_column="3"
             app:layout_row="0"
-            android:id="@+id/btn_Logout"
-            android:background="@drawable/logout_32"/>
+            android:id="@+id/btn_Logout"/>
+            <!--android:background="@drawable/logout_32"/>-->
 
         <Button
             android:id="@+id/buttonArataMeniuSus"

@@ -81,7 +81,7 @@ public class Login extends AppCompatActivity {
 
     private void resetForm() {
         tvStatus.setText("");
-        tvStatus.setVisibility(View.GONE);
+        //tvStatus.setVisibility(View.GONE);
 
         eTextPass.setText("");
         eTextUser.setText("");

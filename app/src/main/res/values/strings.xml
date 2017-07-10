@@ -80,4 +80,6 @@
     <string name="user_parola_gresit">Combinatia de User si Parola nu se potrivesc</string>
     <string name="relogare">Va rugam sa logati din nou!</string>
     <string name="tilu_relogat">Relogare</string>
+    <string name="eorare_conexiune_server">Eroare la conexiunea cu serverul</string>
+    <string name="statusPlata">Status:</string>
 </resources>

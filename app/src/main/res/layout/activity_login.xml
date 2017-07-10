@@ -6,16 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.mihaia.ecamin.Login.Login"
     android:orientation="vertical"
-    android:background="@color/background_gri">
+    android:background="@color/alb">
 
-    <TextView
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/textNormal"
-        android:visibility="gone"
-        android:id="@+id/tv_login_status"
-        android:textColor="@color/portocaliuING"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,13 +19,18 @@
         android:paddingBottom="20dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:background="@color/alb">
+        android:paddingTop="10dp"
+        android:background="@drawable/border_verde">
 
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
+        android:background="@drawable/circular_border"
+        android:layout_gravity="center"
         />
 
 
@@ -44,8 +41,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/prompt_user"
+        android:textColorHint="@color/alb"
         android:inputType="textAutoComplete"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:textColor="@color/alb"/>
     />
 
     <EditText
@@ -53,8 +52,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/prompt_password"
+        android:textColorHint="@color/alb"
         android:inputType="textPassword"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:textColor="@color/alb"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/verdeAndrei"
+            android:background="@drawable/border"
             android:textColor="@color/alb"
             />
 
@@ -84,11 +85,20 @@
                 android:layout_gravity="center"
                 android:id="@+id/butLogin"
                 android:text="@string/action_sign_in_short"
-                android:background="@color/verdeAndrei"
+                android:background="@drawable/border"
                 android:textColor="@color/alb" />
         </LinearLayout>
 
     </LinearLayout>
-    </LinearLayout>
 
+
+    </LinearLayout>
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/textNormal"
+        android:visibility="gone"
+        android:id="@+id/tv_login_status"
+        android:textColor="@color/portocaliuING"/>
 </LinearLayout>
