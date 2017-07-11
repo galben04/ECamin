@@ -69,8 +69,8 @@ public abstract class LoginAsyncTask extends AsyncTask<String, Void, User> {
             url = new URL(Utils.URLConectare + "Users/Login");
             urlConnection = (HttpURLConnection) url.openConnection();
 
-            urlConnection.setReadTimeout(10 * 1000);
-            urlConnection.setConnectTimeout(10 * 1000);
+            urlConnection.setReadTimeout(5 * 1000);
+            urlConnection.setConnectTimeout(5 * 1000);
             urlConnection.setRequestMethod("POST");
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");

@@ -116,6 +116,8 @@ public class PlangereNouaFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity().getApplicationContext(), R.string.eroare_planegere_descriere_lipsa, Toast.LENGTH_SHORT).show();
             }
+
+            editTextDescriere.setText("");
         }
     };
 

@@ -1,5 +1,6 @@
 package com.mihaia.ecamin;
 
+import com.mihaia.ecamin.DataContracts.Camera;
 import com.mihaia.ecamin.DataContracts.InfoUser;
 import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Stare_Plangere;
@@ -22,6 +23,7 @@ public class Utils {
     public static String valuta = "RON";
 
     public static InfoUser infoUserLogat;
+    public static Camera cameraUserLogat;
 
     public enum Sectiuni{
         Plati,

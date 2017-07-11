@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.mihaia.ecamin.AsyncTaskuri.SelectPlatiAsyncTask;
 import com.mihaia.ecamin.DataContracts.EvidentaPlata;
 import com.mihaia.ecamin.InformatiiPlata;
+import com.mihaia.ecamin.PaginaPrincipala;
 import com.mihaia.ecamin.R;
 
 import java.io.IOException;
@@ -52,14 +53,20 @@ public class IstoricPlatiFragment extends Fragment {
 
                 if(evidentaPlati != null)
                 {
+                    mRecycleViewAdaper.clear();
                     mRecycleViewAdaper.addAll(evidentaPlati);
+
+
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setAdapter(mRecycleViewAdaper);
                 } else
                 {
 
                     Toast.makeText(context, R.string.eorare_conexiune_server, Toast.LENGTH_LONG).show();
                 }
             }
-        }.execute(String.valueOf(1));
+        }.execute(String.valueOf(PaginaPrincipala.getUserLogat().Id_User));
     }
 
     public static IstoricPlatiFragment newInstance(String param1, String param2) {
@@ -112,10 +119,6 @@ public class IstoricPlatiFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewIstoric);
         mRecycleViewAdaper = new RecyclerViewAdapter(arrayList);
-
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mRecycleViewAdaper);
         return view;
     }
 

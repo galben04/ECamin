@@ -57,37 +57,38 @@
         android:layout_marginTop="5dp"
         android:textColor="@color/alb"/>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="40dp"
-        android:gravity="left">
+        android:gravity="center">
 
-        <Button
-            android:id="@+id/butNewUser"
-            android:text="@string/action_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/border"
-            android:textColor="@color/alb"
-            />
+        <!--<Button-->
+            <!--android:id="@+id/butNewUser"-->
+            <!--android:text="@string/action_register"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@drawable/border"-->
+            <!--android:textColor="@color/alb"-->
+            <!--/>-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="right">-->
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/butLogin"
                 android:text="@string/action_sign_in_short"
                 android:background="@drawable/border"
                 android:textColor="@color/alb" />
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
     </LinearLayout>
 

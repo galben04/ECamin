@@ -83,4 +83,5 @@
     <string name="eorare_conexiune_server">Eroare la conexiunea cu serverul</string>
     <string name="statusPlata">Status:</string>
     <string name="masina">Masina:</string>
+    <string name="parolele_difera">Parolele difera</string>
 </resources>

@@ -40,14 +40,15 @@
             app:layout_column="1"
             app:layout_row="1"
             android:inputType="none"
-            android:focusable="false"/>
+            android:focusable="false"
+            android:id="@+id/tv_Principala_CameraUser"/>
 
         <ImageButton
             android:layout_margin="15dp"
             app:layout_column="3"
             app:layout_row="0"
-            android:id="@+id/btn_Logout"/>
-            <!--android:background="@drawable/logout_32"/>-->
+            android:id="@+id/btn_Logout"
+            android:background="@drawable/logout_32"/>
 
         <Button
             android:id="@+id/buttonArataMeniuSus"
@@ -58,25 +59,25 @@
             android:background="@drawable/test1"
             android:visibility="gone"/>
 
-        <LinearLayout android:orientation="horizontal"
-            app:layout_column="0"
-            app:layout_row="3"
-            app:layout_columnSpan="4"
-            android:layout_width="match_parent"
-            android:id="@+id/layoutBaraMeniuSus">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+        <!--<LinearLayout android:orientation="horizontal"-->
+            <!--app:layout_column="0"-->
+            <!--app:layout_row="3"-->
+            <!--app:layout_columnSpan="4"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:id="@+id/layoutBaraMeniuSus">-->
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent" />-->
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent" />-->
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent" />-->
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent" />-->
+        <!--</LinearLayout>-->
     </android.support.v7.widget.GridLayout>
 
     <!--<android.support.v7.widget.Toolbar-->

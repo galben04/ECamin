@@ -37,6 +37,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.notifyItemRangeChanged(0, getItemCount() - 1);
     }
 
+    public void clear() {
+        mDataset.clear();
+        this.notifyDataSetChanged();
+    }
+
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mihaia.ecamin.AsyncTaskuri.GetAsyncTask;
@@ -48,6 +49,7 @@ public class ProgramareNouaFragment2 extends Fragment {
 
     ListView lvOra, lvMasini;
     Spinner spinnerData;
+    TextView tvMasini;
 
     CustomArrayAdapter<String> adapter;
 
@@ -66,6 +68,8 @@ public class ProgramareNouaFragment2 extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_programare_noua2, container, false);
+
+        tvMasini = (TextView) view.findViewById(R.id.tv_progNoua_textMasini);
 
         lvOra = (ListView) view.findViewById(R.id.listview_ProgNoua_Ora);
         lvMasini = (ListView) view.findViewById(R.id.listview_ProgNoua_Masini);
@@ -134,10 +138,24 @@ public class ProgramareNouaFragment2 extends Fragment {
                         }
                     }.execute(itemToInsert);
                 }
+
+                resetForm();
             }
         });
 
         return view;
+    }
+
+    private void resetForm() {
+        populareSpinnerData();
+        lvOra.setEnabled(false);
+        lvOra.invalidate();
+        adapter.clear();
+
+        lvMasini.setVisibility(View.GONE);
+        tvMasini.setVisibility(View.GONE);
+
+
     }
 
 
@@ -189,11 +207,12 @@ public class ProgramareNouaFragment2 extends Fragment {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             lvOra.setEnabled(false);
 
-            adapter.clear();
+            lvOra.invalidate();
+            //adapter.clear();
             adapter.notifyDataSetChanged();
 
             lvMasini.setVisibility(View.GONE);
-            //.setVisibility(View.GONE);
+            tvMasini.setVisibility(View.GONE);
 
             if(position > 0) {
                 String[] dateParts = (parent.getItemAtPosition(position).toString()).split("\\.");
@@ -263,7 +282,7 @@ public class ProgramareNouaFragment2 extends Fragment {
 
     public void populareSpinnerMasiniDisponibile(Collection<Masina_Spalat> masini) {
         lvMasini.setVisibility(View.VISIBLE);
-       // tvOptional.setVisibility(View.VISIBLE);
+        tvMasini.setVisibility(View.VISIBLE);
 
         ArrayList<String> masiniValues = new ArrayList<String>();
 

@@ -1,0 +1,155 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.mihaia.ecamin.SetariFragment"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/background_gri">
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:orientation="horizontal"
+        android:background="@color/verdeAndrei">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/down_arrow_32"
+            android:layout_weight="0"
+            android:id="@+id/iBtn_Setari_Valuta"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valuta"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:paddingLeft="5dp"
+       android:paddingRight="5dp"
+       android:background="@color/alb"
+       android:paddingTop="5dp"
+       android:paddingBottom="5dp">
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:background="@color/background_gri"
+           android:layout_marginRight="5dp"
+           android:text="RON"
+           android:textColor="@color/albastruLogo"/>
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:background="@color/albastruLogo"
+           android:text="EUR"
+           android:textColor="@color/alb"/>
+   </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:orientation="horizontal"
+        android:background="@color/verdeAndrei">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/down_arrow_32"
+            android:layout_weight="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Setari cont"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:padding="5dp"
+        android:background="@color/alb">
+
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:text="Nume utilizator"/>
+
+        <EditText android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_columnSpan="2"
+            android:text="Nume utilizator"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/et_Setari_NumeCont"
+            android:inputType="none"/>
+
+        <TextView  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:text="Parola"/>
+
+        <EditText android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_columnSpan="2"
+            android:hint="Parola"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/et_Setari_Parola"/>
+
+        <TextView  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:text="Reintroduce Parola"
+            android:id="@+id/tv_setari_parola2"/>
+
+        <EditText android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_columnSpan="2"
+            android:hint="Reintroduce parola"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/et_setari_parola2"/>
+
+        <Button android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_column="0"
+            android:layout_row="3"
+            android:layout_columnSpan="3"
+            android:padding="5dp"
+            android:text="Salveaza"
+            android:background="@color/albastruLogo"
+            android:textColor="@color/alb"
+            android:id="@+id/btn_salveaza"/>
+
+    </GridLayout>
+
+
+</LinearLayout>

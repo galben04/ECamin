@@ -62,10 +62,6 @@ public class PlangerileMeleFragment extends Fragment {
 
 
     private void getData() throws IOException {
-//        if(mRecycleViewAdaper != null) {
-//            mRecycleViewAdaper.clear();
-//            mRecycleViewAdaper.notifyDataSetChanged();
-//        }
         new SelectMethodAsync("Plangeri").execute(String.valueOf(PaginaPrincipala.getUserLogat().Id_User));
     }
 
@@ -94,8 +90,6 @@ public class PlangerileMeleFragment extends Fragment {
         data.add(new Plangere(1, 1, 1, new Date(), null, false, false, "Chiuveta este fisurata, curge apa"));
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewListaPlangeri);
-
-        mRecycleViewAdaper = new PlangeriRecyclerViewAdapter(this.getContext(), data);
 
         context = this.getContext();
 //        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
@@ -213,6 +207,8 @@ public class PlangerileMeleFragment extends Fragment {
 
             //data.add(p1);
             if(plangeri != null) {
+                mRecycleViewAdaper = new PlangeriRecyclerViewAdapter(context, data);
+
                 mRecycleViewAdaper.clear();
                 mRecycleViewAdaper.addAll(plangeri);
                 LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);

@@ -44,9 +44,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 fragment =  tab2;
                 break;
 
-            case 2:
-                fragment = tab3;
-                break;
             default:
                 break;
         }
@@ -78,25 +75,21 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case Plati:
                 tab1 = new PlataScadentaFragment();
                 tab2 = new IstoricPlatiFragment();
-                tab3 = null;
                 break;
 
             case Plangeri:
                 tab1 = new PlangerileMeleFragment();
                 tab2 = new PlangereNouaFragment();
-                tab3 = null;
                 break;
 
             case Programari:
                 tab1 = new ProgramarileMeleFragment();
                 tab2 = new ProgramareNouaFragment2();
-                tab3 = null;
                 break;
 
             case Setari:
-                tab1 = new PlataScadentaFragment();
-                tab2 = new IstoricPlatiFragment();
-                tab3 = new PlataScadentaFragment();
+                tab1 = new SetariFragment();
+                tab2 = null;
                 break;
         }
 

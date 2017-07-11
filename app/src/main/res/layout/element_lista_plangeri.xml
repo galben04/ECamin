@@ -62,8 +62,7 @@
                 android:background="@drawable/delete_24"
                 android:layout_marginRight="15dp"
                 android:id="@+id/iBtnPlangeri_Delete"
-                android:gravity="center"
-                />
+                android:gravity="center"/>
         </LinearLayout>
 
         <LinearLayout

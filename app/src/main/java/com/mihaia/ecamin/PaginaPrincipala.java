@@ -28,11 +28,13 @@ import com.google.gson.Gson;
 import com.mihaia.ecamin.DataContracts.InfoUser;
 import com.mihaia.ecamin.DataContracts.User;
 
+import org.w3c.dom.Text;
+
 public class PaginaPrincipala extends AppCompatActivity {
 
     BottomNavigationView buttomBar;
 
-    TextView tvUser;
+    TextView tvUser, tvCameraUser;
 
     LinearLayout layoutMeniuSus;
     Button butArataMeniu;
@@ -89,6 +91,8 @@ public class PaginaPrincipala extends AppCompatActivity {
             }
         });
 
+        tvCameraUser = (TextView) findViewById(R.id.tv_Principala_CameraUser);
+        tvCameraUser.setText("Camera " + Utils.cameraUserLogat.Numar + "");
         tvUser = (TextView) findViewById(R.id.tv_Principala_user);
         getCurrentUser();
 
@@ -98,12 +102,8 @@ public class PaginaPrincipala extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.opt1_tab1));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.opt1_tab2));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.opt1_tab3));
 
         adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-
-        layoutMeniuSus = (LinearLayout) findViewById(R.id.layoutBaraMeniuSus);
-        layoutMeniuSus.setVisibility(View.GONE);
 
         /*****************ButtomBar*****///////////////
         buttomBar  = (BottomNavigationView) findViewById(R.id.navigationDown);
@@ -115,7 +115,7 @@ public class PaginaPrincipala extends AppCompatActivity {
                 {
                     case R.id.action_1:
                         adapter.setSectiuneCurenta(Utils.Sectiuni.Plati);
-                        if(adapter.getCount() == 3){
+                        if(adapter.getCount() == 1){
                             tabLayout.addTab(tabLayout.newTab());
                             adapter.mNumOfTabs = 2;
                         }
@@ -127,8 +127,8 @@ public class PaginaPrincipala extends AppCompatActivity {
 
                     case R.id.action_2:
                         adapter.setSectiuneCurenta(Utils.Sectiuni.Plangeri);
-                        if(adapter.getCount() == 3){
-                            tabLayout.removeTab(tabLayout.getTabAt(2));
+                        if(adapter.getCount() == 1){
+                            tabLayout.addTab(tabLayout.newTab());
                             adapter.mNumOfTabs = 2;
 
                         }
@@ -141,8 +141,8 @@ public class PaginaPrincipala extends AppCompatActivity {
 
                     case R.id.action_3:
                         adapter.setSectiuneCurenta(Utils.Sectiuni.Programari);
-                        if(adapter.getCount() == 3){
-                            tabLayout.removeTab(tabLayout.getTabAt(2));
+                        if(adapter.getCount() == 1){
+                            tabLayout.addTab(tabLayout.newTab());
                             adapter.mNumOfTabs = 2;
                         }
 
@@ -153,7 +153,12 @@ public class PaginaPrincipala extends AppCompatActivity {
 
                     case R.id.action_4:
                         adapter.setSectiuneCurenta(Utils.Sectiuni.Setari);
-                        Toast.makeText(getApplicationContext(), "OPT 1", Toast.LENGTH_LONG).show();
+                        if(adapter.getCount() == 2){
+                            tabLayout.removeTab(tabLayout.getTabAt(1));
+                            adapter.mNumOfTabs = 1;
+                        }
+                        adapter.notifyDataSetChanged();
+                        tabLayout.getTabAt(0).setText("Setari");
                     break;
                 }
                 return true;

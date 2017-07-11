@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mihaia.ecamin.AsyncTaskuri.DeleteAsyncTask;
+import com.mihaia.ecamin.AsyncTaskuri.GetMasiniAsyncTask;
 import com.mihaia.ecamin.AsyncTaskuri.GetMasiniLibereAsyncTask;
 import com.mihaia.ecamin.DataContracts.Masina_Spalat;
 import com.mihaia.ecamin.DataContracts.Programare;
@@ -93,6 +94,16 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
         this.context = context;
         mDataset = dataset;
         this.ReftoThis = this;
+
+        new GetMasiniAsyncTask("MasiniSpalat") {
+            @Override
+            protected void onPostExecute(Collection<Masina_Spalat> masini) {
+                super.onPostExecute(masini);
+                if(masini != null)
+                    Utils.MasiniSpalat.addAll(masini);
+                ReftoThis.notifyDataSetChanged();
+            }
+        }.execute();
     }
 
     // Create new views (invoked by the layout manager)
@@ -101,16 +112,6 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
                                                              int viewType) {
         View v = (View) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.element_lista_programari, parent, false);
-
-            new GetMasiniLibereAsyncTask("MasiniSpalat") {
-                @Override
-                protected void onPostExecute(Collection<Masina_Spalat> masini) {
-                    super.onPostExecute(masini);
-                    if(masini != null)
-                        Utils.MasiniSpalat.addAll(masini);
-                    ReftoThis.notifyDataSetChanged();
-                }
-            }.execute();
 
 
         ProgramariRecyclerViewAdapter.ViewHolder vh = new ProgramariRecyclerViewAdapter.ViewHolder(v);
@@ -124,7 +125,7 @@ public class ProgramariRecyclerViewAdapter extends RecyclerView.Adapter<Programa
 
         if(Utils.getMasinabyId(mDataset.get(poz).Id_Masina) != null) {
             holder.IdMasina.setText(Utils.getMasinabyId(mDataset.get(poz).Id_Masina).Nume);
-            holder.EtajMasina.setText(Utils.getMasinabyId(mDataset.get(poz).Id_Masina).Etaj);
+            holder.EtajMasina.setText(String.valueOf(Utils.getMasinabyId(mDataset.get(poz).Id_Masina).Etaj));
         } else{
             holder.IdMasina.setText(String.valueOf(mDataset.get(poz).Id_Masina));
             holder.EtajMasina.setText("-");

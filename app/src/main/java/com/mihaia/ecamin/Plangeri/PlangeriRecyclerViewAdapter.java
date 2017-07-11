@@ -86,16 +86,16 @@ public class PlangeriRecyclerViewAdapter extends RecyclerView.Adapter<PlangeriRe
             }
         };
 
-        private void extindeLayoutDetaliii()
-        {
-            if(layoutDetalii.getVisibility() == View.VISIBLE){
-                layoutDetalii.setVisibility(View.GONE);
-                btnDetalii.setBackgroundResource(R.drawable.more_24);
-            } else {
-                layoutDetalii.setVisibility(View.VISIBLE);
-                btnDetalii.setBackgroundResource(R.drawable.less_24);
-            }
-        }
+//        private void extindeLayoutDetaliii()
+//        {
+//            if(layoutDetalii.getVisibility() == View.VISIBLE){
+//                layoutDetalii.setVisibility(View.GONE);
+//                btnDetalii.setBackgroundResource(R.drawable.more_24);
+//            } else {
+//                layoutDetalii.setVisibility(View.VISIBLE);
+//                btnDetalii.setBackgroundResource(R.drawable.less_24);
+//            }
+//        }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -104,12 +104,6 @@ public class PlangeriRecyclerViewAdapter extends RecyclerView.Adapter<PlangeriRe
         mDataset = dataset;
         inflater = LayoutInflater.from(context);
         this.ReftoThis = this;
-    }
-
-
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = (View) inflater.inflate(R.layout.element_lista_plangeri, parent, false);
 
         new GetStariPlangeriAsync("StariPlangeri") {
             @Override
@@ -117,9 +111,15 @@ public class PlangeriRecyclerViewAdapter extends RecyclerView.Adapter<PlangeriRe
                 super.onPostExecute(stari);
                 if(stari != null)
                     Utils.StariPlageri.addAll(stari);
-                    ReftoThis.notifyDataSetChanged();
+                ReftoThis.notifyDataSetChanged();
             }
         }.execute();
+    }
+
+
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = (View) inflater.inflate(R.layout.element_lista_plangeri, parent, false);
 
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
