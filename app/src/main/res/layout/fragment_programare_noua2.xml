@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         style="@style/Container"
         android:background="@color/alb"
@@ -45,11 +45,11 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="2">
+            android:weightSum="3">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.8"
+            android:layout_weight="2.8"
             android:orientation="horizontal"
             android:weightSum="2"
             android:background="@color/alb"
@@ -59,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/scrollView_ProgNoua_Ora"
-                android:layout_weight="0.6"
+                android:layout_weight="1"
                 android:layout_marginRight="5dp"
                 android:orientation="vertical">
 
@@ -88,7 +88,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/scrollView_ProgNoua_Masini"
-                android:layout_weight="1.4"
+                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:orientation="vertical"
                 android:layout_marginTop="40dp"
@@ -128,4 +128,4 @@
 
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

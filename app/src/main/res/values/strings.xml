@@ -84,4 +84,7 @@
     <string name="statusPlata">Status:</string>
     <string name="masina">Masina:</string>
     <string name="parolele_difera">Parolele difera</string>
+    <string name="Prenume">Prenume</string>
+    <string name="Camera">Camera</string>
+    <string name="Telefon">Telefon</string>
 </resources>

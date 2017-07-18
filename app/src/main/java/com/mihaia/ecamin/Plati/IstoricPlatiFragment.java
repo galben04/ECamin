@@ -13,14 +13,11 @@ import android.widget.Toast;
 
 import com.mihaia.ecamin.AsyncTaskuri.SelectPlatiAsyncTask;
 import com.mihaia.ecamin.DataContracts.EvidentaPlata;
-import com.mihaia.ecamin.InformatiiPlata;
 import com.mihaia.ecamin.PaginaPrincipala;
 import com.mihaia.ecamin.R;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.GregorianCalendar;
 
 
 public class IstoricPlatiFragment extends Fragment {

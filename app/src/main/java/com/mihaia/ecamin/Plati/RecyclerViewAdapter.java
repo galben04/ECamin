@@ -10,13 +10,11 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.mihaia.ecamin.DataContracts.EvidentaPlata;
-import com.mihaia.ecamin.InformatiiPlata;
 import com.mihaia.ecamin.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**

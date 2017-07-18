@@ -78,6 +78,7 @@ public class Login extends AppCompatActivity {
 
     private void login(){
         progressBar.setVisibility(View.VISIBLE);
+
         LoginAsyncTask verificaDate = new LoginAsyncTask(this, this) {
             @Override
             protected void onPostExecute(final User user) {
@@ -107,11 +108,15 @@ public class Login extends AppCompatActivity {
                                     if(camera != null)
                                     {
                                         Utils.cameraUserLogat = camera;
+                                    } else
+                                    {
+                                        Utils.cameraUserLogat  = new Camera();
+                                        camera.Numar = 0;
                                     }
 
-                                    progressBar.setVisibility(View.GONE);
                                     resetForm();
                                     context.startActivity(intent);
+                                    progressBar.setVisibility(View.GONE);
                                 }
                             }.execute(String.valueOf(user.Id_User));
 
@@ -128,7 +133,7 @@ public class Login extends AppCompatActivity {
             }
         };
         verificaDate.execute(eTextUser.getText().toString(), eTextPass.getText().toString());
-        progressBar.setVisibility(View.GONE);
+
     }
 
     private void contNou(){

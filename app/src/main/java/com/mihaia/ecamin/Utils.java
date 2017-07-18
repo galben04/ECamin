@@ -32,9 +32,11 @@ public class Utils {
         Setari
     }
 
-    public static String URLConectare = "http://192.168.1.78:51133/";
-    //"http://169.254.237.217:51133/" ;//"http://192.168.0.129:51133/";
+    public static String URLConectare = "http://192.168.43.25:51133/";//"http://192.168.0.129:51133/";
+           // "http://192.168.1.78:51133/";
+    //"http://169.254.237.217:51133/" ;//"http://192.168.43.25:51133/";
     //"http://192.168.1.78:51133/" Munca;
+    //munca laptop: "http://192.168.142.1:51133/"
 
 
     public static ArrayList<Stare_Plangere> StariPlageri = new ArrayList<Stare_Plangere>();

@@ -88,12 +88,17 @@ public abstract class LoginAsyncTask extends AsyncTask<String, Void, User> {
 
             if(statusCode == HttpURLConnection.HTTP_OK){
                 server_response = readStream(urlConnection.getInputStream());
+                if(server_response != null){
+                    try {
+                        responseUser = gson.fromJson(server_response, User.class);
+                    }catch(IllegalStateException | JsonSyntaxException exception){
+                        exception.printStackTrace();
+                    }
 
-                try {
-                    responseUser = gson.fromJson(server_response, User.class);
-                }catch(IllegalStateException | JsonSyntaxException exception){
-                    exception.printStackTrace();
+                } else{
+                    return null;
                 }
+
             } else {
 //                parent.runOnUiThread(new Runnable() {
 //                    public void run() {

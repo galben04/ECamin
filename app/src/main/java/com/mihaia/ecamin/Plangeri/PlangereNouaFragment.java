@@ -127,7 +127,7 @@ public class PlangereNouaFragment extends Fragment {
 
         plangere.Descriere = editTextDescriere.getText().toString();
         plangere.Data = new Date();
-        plangere.Id_Stare = 3; //INREGISTRATA
+        plangere.Id_Stare = 5; //INREGISTRATA
         plangere.IsClosed = false;
         plangere.DataFinalizare = new Date();
         plangere.IsDel = false;

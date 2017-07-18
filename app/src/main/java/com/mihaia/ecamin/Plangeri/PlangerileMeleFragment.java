@@ -109,6 +109,7 @@ public class PlangerileMeleFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
     }
 
     @Override
@@ -215,7 +216,7 @@ public class PlangerileMeleFragment extends Fragment {
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setAdapter(mRecycleViewAdaper);
 
-                Toast.makeText(getContext(), "Reusit!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Reusit!", Toast.LENGTH_SHORT).show();
                 Log.e("Response", "" + server_response);
             }
 

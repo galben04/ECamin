@@ -92,7 +92,7 @@ public class PaginaPrincipala extends AppCompatActivity {
         });
 
         tvCameraUser = (TextView) findViewById(R.id.tv_Principala_CameraUser);
-        tvCameraUser.setText("Camera " + Utils.cameraUserLogat.Numar + "");
+        tvCameraUser.setText("Camera " + Utils.cameraUserLogat.Numar);
         tvUser = (TextView) findViewById(R.id.tv_Principala_user);
         getCurrentUser();
 
@@ -260,7 +260,7 @@ public class PaginaPrincipala extends AppCompatActivity {
             dialog.show();
         }else {
             this.UserLogat = user;
-            tvUser.setText(UserLogat.Cont);
+            tvUser.setText(Utils.infoUserLogat.Nume + " " + Utils.infoUserLogat.Prenume);
         }
     }
 
